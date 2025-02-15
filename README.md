@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/41a9808e-a960-415c-b0a0-99e0e5f8e7f3/deploy-status)](https://app.netlify.com/sites/binance-pulse/deploys)
+![GitHub Actions Status](https://github.com/attilacsanyi/binance-pulse/actions/workflows/ci.yml/badge.svg)
 # Binance Pulse
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
