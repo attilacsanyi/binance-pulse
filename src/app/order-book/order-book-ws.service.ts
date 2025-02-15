@@ -25,7 +25,11 @@ interface OrderBookMessage {
 @Injectable()
 export class OrderBookWSService {
   #websocket: WebSocket | null = null;
-  orderBookData = signal<OrderBookData | undefined>(undefined);
+  #orderBookData = signal<OrderBookData | undefined>(undefined);
+
+  get orderBookData() {
+    return this.#orderBookData.asReadonly();
+  }
 
   connect(symbol: string): void {
     const wsUrl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@depth5@100ms`;
@@ -67,6 +71,6 @@ export class OrderBookWSService {
       quantity,
     }));
 
-    this.orderBookData.set({ bids, asks });
+    this.#orderBookData.set({ bids, asks });
   }
 }
