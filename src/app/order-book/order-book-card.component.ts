@@ -12,10 +12,12 @@ import { OrderBookWSService } from './order-book-ws.service';
 @Component({
   selector: 'cp-order-book-card',
   template: `
-    <div>
-      <h2>Order Book: {{ symbol() | uppercase }}</h2>
+    <h2>Order Book: {{ symbol() | uppercase }}</h2>
+    @if (orderBookData(); as orderBookData) {
       <button (click)="removeOrderBook()">Remove</button>
-    </div>
+    } @else {
+      <div>Waiting for order book data...</div>
+    }
   `,
   imports: [UpperCasePipe],
   providers: [OrderBookWSService],
@@ -26,6 +28,8 @@ export class OrderBookCardComponent implements OnInit {
   remove = output<string>();
 
   readonly #orderBookService = inject(OrderBookWSService);
+
+  orderBookData = this.#orderBookService.orderBookData;
 
   ngOnInit() {
     this.#orderBookService.connect(this.symbol());
