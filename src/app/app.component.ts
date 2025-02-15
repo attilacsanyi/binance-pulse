@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { OrderBookComponent } from './order-book/order-book.component';
+import { OrderBookComponent } from './order-book/order-book-detail.component';
 import { TradingPairSelectorComponent } from './trading-pair-selector.component';
 
 @Component({

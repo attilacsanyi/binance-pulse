@@ -23,7 +23,7 @@ interface OrderBookMessage {
 }
 
 @Injectable()
-export class OrderBookService {
+export class OrderBookWSService {
   #websocket: WebSocket | null = null;
   orderBookData = signal<OrderBookData | undefined>(undefined);
 

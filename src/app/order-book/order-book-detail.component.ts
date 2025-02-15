@@ -5,31 +5,34 @@ import {
   inject,
   input,
   OnInit,
+  output,
 } from '@angular/core';
-import { OrderBookService } from './order-book.service';
+import { OrderBookWSService } from './order-book-ws.service';
 
 @Component({
   selector: 'cp-order-book',
   template: `
     <div>
       <h2>Order Book: {{ symbol() | uppercase }}</h2>
-      <button (click)="remove()">Remove</button>
+      <button (click)="removeOrderBook()">Remove</button>
     </div>
   `,
   imports: [UpperCasePipe],
-  providers: [OrderBookService],
+  providers: [OrderBookWSService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderBookComponent implements OnInit {
   symbol = input.required<string>();
+  remove = output<string>();
 
-  readonly #orderBookService = inject(OrderBookService);
+  readonly #orderBookService = inject(OrderBookWSService);
 
   ngOnInit() {
     this.#orderBookService.connect(this.symbol());
   }
 
-  remove() {
+  removeOrderBook() {
     this.#orderBookService.disconnect();
+    this.remove.emit(this.symbol());
   }
 }
