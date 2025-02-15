@@ -432,7 +432,7 @@ import { CommonModule } from '@angular/common';
         <div id="welcome">
           <h1>
             <span> Hello there, </span>
-            Welcome binance-pulse 👋
+            Welcome binance-pulse 👋 Let's get started
           </h1>
         </div>
         <!--  HERO  -->
