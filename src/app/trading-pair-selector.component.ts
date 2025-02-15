@@ -5,19 +5,22 @@ import { BinanceService } from './binance.service';
 @Component({
   selector: 'cp-trading-pair-selector',
   template: `
-    <div>
-      @if (tradingPairs(); as tradingPairs) {
-        <select>
-          @for (pair of tradingPairs; track pair.symbol) {
-            <option [value]="pair.symbol">
-              {{ pair.symbol }}
-            </option>
-          }
-        </select>
-      } @else {
-        <div>Trading pairs are loading...</div>
-      }
-    </div>
+    @if (tradingPairs(); as tradingPairs) {
+      <select>
+        @for (pair of tradingPairs; track pair.symbol) {
+          <option [value]="pair.symbol">
+            {{ pair.symbol }}
+          </option>
+        }
+      </select>
+    } @else {
+      <div>Trading pairs are loading...</div>
+    }
+  `,
+  styles: `
+    :host {
+      display: contents;
+    }
   `,
 })
 export class TradingPairSelectorComponent {
