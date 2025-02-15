@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TradingPairSelectorComponent } from './trading-pair-selector.component';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, TradingPairSelectorComponent],
   selector: 'cp-root',
   template: `
     <div class="min-h-screen bg-gray-100">
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
         </div>
       </header>
       <main class="mx-auto max-w-7xl px-4 py-6">
+        <cp-trading-pair-selector />
         <router-outlet></router-outlet>
       </main>
     </div>
