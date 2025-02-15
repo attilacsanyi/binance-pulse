@@ -9,6 +9,7 @@
     "demo": "http-server dist/binance-pulse/browser -b -p 5200 -o",
     "deploy": "nx run deploy-prod",
     "lint": "nx lint --fix",
+    "ci": "pnpm test && pnpm lint",
     "format": "nx format:write --all"
   },
   "private": true,
