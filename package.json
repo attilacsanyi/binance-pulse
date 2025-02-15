@@ -7,7 +7,9 @@
     "build": "nx build",
     "test": "nx test",
     "demo": "http-server dist/binance-pulse/browser -b -p 5200 -o",
-    "deploy": "nx run deploy-prod"
+    "deploy": "nx run deploy-prod",
+    "lint": "nx lint --fix",
+    "format": "nx format:write --all"
   },
   "private": true,
   "dependencies": {
