@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule],
   selector: 'cp-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  template: `
+    <h1>{{ title }}</h1>
+    <router-outlet></router-outlet>
+  `,
 })
 export class AppComponent {
-  title = 'binance-pulse';
+  title = 'Binance Pulse';
 }
