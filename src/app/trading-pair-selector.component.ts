@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BinanceService } from './binance.service';
 
@@ -22,6 +22,7 @@ import { BinanceService } from './binance.service';
       display: contents;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingPairSelectorComponent {
   readonly #binanceService = inject(BinanceService);

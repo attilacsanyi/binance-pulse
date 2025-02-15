@@ -1,5 +1,11 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, inject, input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  OnInit,
+} from '@angular/core';
 import { OrderBookService } from './order-book.service';
 
 @Component({
@@ -12,6 +18,7 @@ import { OrderBookService } from './order-book.service';
   `,
   imports: [UpperCasePipe],
   providers: [OrderBookService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderBookComponent implements OnInit {
   symbol = input.required<string>();

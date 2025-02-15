@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { OrderBookComponent } from './order-book/order-book.component';
 import { TradingPairSelectorComponent } from './trading-pair-selector.component';
 
 @Component({
-  imports: [RouterModule, TradingPairSelectorComponent, OrderBookComponent],
   selector: 'cp-root',
   template: `
     <div class="min-h-screen bg-gray-100">
@@ -20,6 +19,8 @@ import { TradingPairSelectorComponent } from './trading-pair-selector.component'
       </main>
     </div>
   `,
+  imports: [RouterModule, TradingPairSelectorComponent, OrderBookComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   title = 'Binance Pulse';
