@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { OrderBookComponent } from './order-book/order-book-detail.component';
-import { TradingPairSelectorComponent } from './trading-pair-selector.component';
 
 @Component({
   selector: 'cp-root',
@@ -13,13 +11,11 @@ import { TradingPairSelectorComponent } from './trading-pair-selector.component'
         </div>
       </header>
       <main class="mx-auto max-w-7xl px-4 py-6">
-        <cp-trading-pair-selector />
-        <cp-order-book symbol="soleth" />
         <router-outlet></router-outlet>
       </main>
     </div>
   `,
-  imports: [RouterModule, TradingPairSelectorComponent, OrderBookComponent],
+  imports: [RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
