@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TradingPairSelectorComponent } from '../trading-pair-selector.component';
-import { OrderBookComponent } from './order-book-detail.component';
+import { OrderBookCardComponent } from './order-book-card.component';
 import { OrderBookStoreService } from './order-book-store.service';
 
 @Component({
@@ -8,13 +8,13 @@ import { OrderBookStoreService } from './order-book-store.service';
     <h2 class="text-xl font-bold text-gray-900">Order Book</h2>
     <cp-trading-pair-selector (symbolSelected)="addOrderBookSymbol($event)" />
     @for (symbol of orderBookSymbols(); track symbol) {
-      <cp-order-book
+      <cp-order-book-card
         [symbol]="symbol"
         (remove)="removeOrderBookSymbol($event)"
       />
     }
   `,
-  imports: [TradingPairSelectorComponent, OrderBookComponent],
+  imports: [TradingPairSelectorComponent, OrderBookCardComponent],
   providers: [OrderBookStoreService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

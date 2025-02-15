@@ -10,7 +10,7 @@ import {
 import { OrderBookWSService } from './order-book-ws.service';
 
 @Component({
-  selector: 'cp-order-book',
+  selector: 'cp-order-book-card',
   template: `
     <div>
       <h2>Order Book: {{ symbol() | uppercase }}</h2>
@@ -21,7 +21,7 @@ import { OrderBookWSService } from './order-book-ws.service';
   providers: [OrderBookWSService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrderBookComponent implements OnInit {
+export class OrderBookCardComponent implements OnInit {
   symbol = input.required<string>();
   remove = output<string>();
 
