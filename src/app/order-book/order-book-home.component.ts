@@ -5,12 +5,14 @@ import { TradingPairSelectorComponent } from './trading-pair-selector.component'
 
 @Component({
   template: `
-    <h2 class="text-xl font-bold">Order Book</h2>
-    <bp-trading-pair-selector
-      [tradingPairs]="tradingPairs()"
-      (pairSelected)="addOrderBookSymbol($event)"
-    />
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <h2 class="mb-4 text-xl font-bold">Order Book</h2>
+    <div class="mb-4">
+      <bp-trading-pair-selector
+        [tradingPairs]="tradingPairs()"
+        (pairSelected)="addOrderBookSymbol($event)"
+      />
+    </div>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       @for (symbol of orderBookSymbols(); track symbol) {
         <bp-order-book-card
           [symbol]="symbol"
