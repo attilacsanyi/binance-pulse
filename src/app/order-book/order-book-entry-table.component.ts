@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         </tr>
       </thead>
       <tbody>
-        @for (entry of entries(); track entry.price) {
+        @for (entry of entries(); track entry) {
           <tr>
             <td>{{ entry.price }}</td>
             <td>{{ entry.quantity | number: '1.1-3' }}</td>
@@ -21,6 +21,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         }
       </tbody>
     </table>
+  `,
+  styles: `
+    :host {
+      display: contents;
+    }
   `,
   imports: [DecimalPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
