@@ -2,82 +2,55 @@
 
 # Binance Pulse
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Real-time order book visualization for Binance trading pairs.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Features
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- Real-time order book data via WebSocket connection
+- Multiple order book views simultaneously
+- Trading pair selection with autocomplete
+- ETH quote asset pairs supported by default
+- Responsive grid layout
 
-## Finish your CI setup
+## Getting Started
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/v4Tn5qNryu)
+- Install dependencies: `pnpm install`
+- Start the development server: `pnpm start`
+- Build for production: `pnpm build`
+- Local production demo: `pnpm demo` (using `http-server`)
+- Test: `pnpm test`
+- Lint: `pnpm lint`
 
-## Run tasks
+## Developer Notes
 
-To run the dev server for your app, use:
+### WebSocket Connection
 
-```sh
-npx nx serve binance-pulse
+The application connects to Binance's WebSocket API using the following format:
+
+```typescript
+wss://stream.binance.com:9443/ws/adaeth@depth5@100ms
 ```
 
-To create a production bundle:
+### Binance API
 
-```sh
-npx nx build binance-pulse
+The application uses the Binance API to get the list of trading pairs.
+
+```typescript
+https://api.binance.com/api/v3/exchangeInfo
 ```
 
-To see all available targets to run for a project, run:
+### State Management
 
-```sh
-npx nx show project binance-pulse
-```
+The application uses NgRx Signals for state management with:
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+- Computed signals for derived state
+- Signal stores for complex state management
+- Component-level signals for local state
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Deployment
 
-## Add new projects
+The application is configured for Netlify deployment using the `deploy` script and Github Actions (`ci.yml`).
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+---
 
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Built with [Nx](https://nx.dev) 🔥
