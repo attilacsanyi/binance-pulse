@@ -20,24 +20,26 @@ import { OrderBookWSService } from './order-book-ws.service';
         <mat-card-title>{{ symbol() | uppercase }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        @if (orderBookData(); as orderBookData) {
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <bp-order-book-entry-table
-                title="Bids"
-                [entries]="orderBookData.bids"
-              />
+        <div class="mt-4">
+          @if (orderBookData(); as orderBookData) {
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <bp-order-book-entry-table
+                  title="Bids"
+                  [entries]="orderBookData.bids"
+                />
+              </div>
+              <div>
+                <bp-order-book-entry-table
+                  title="Asks"
+                  [entries]="orderBookData.asks"
+                />
+              </div>
             </div>
-            <div>
-              <bp-order-book-entry-table
-                title="Asks"
-                [entries]="orderBookData.asks"
-              />
-            </div>
-          </div>
-        } @else {
-          <div>Waiting for order book data...</div>
-        }
+          } @else {
+            <span>Waiting for order book data...</span>
+          }
+        </div>
       </mat-card-content>
       <mat-card-actions align="end">
         <button
