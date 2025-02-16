@@ -21,7 +21,6 @@ interface OrderBookEntryVM {
     <h3 class="my-4 text-lg font-bold">{{ title() }}</h3>
     <table
       mat-table
-      class="mat-elevation-z8 demo-table"
       [dataSource]="entries()"
     >
       @for (column of columns; track column) {
