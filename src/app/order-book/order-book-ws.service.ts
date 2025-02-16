@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { environment } from '@env';
 
 interface OrderBookEntry {
   price: string;
@@ -32,7 +33,7 @@ export class OrderBookWSService {
   }
 
   connect(symbol: string): void {
-    const wsUrl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@depth5@100ms`;
+    const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
     this.#websocket = new WebSocket(wsUrl);
 
     this.#websocket.onopen = () => {
