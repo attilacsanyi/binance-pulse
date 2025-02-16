@@ -1,8 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 
 interface OrderBookEntry {
-  price: number;
-  quantity: number;
+  price: string;
+  quantity: string;
 }
 
 interface OrderBookData {
@@ -63,12 +63,12 @@ export class OrderBookWSService {
     // TODO: add zod validation with expected schema
     const data: OrderBookMessage = JSON.parse(message);
     const bids: OrderBookEntry[] = data.bids.map(([price, quantity]) => ({
-      price: Number(price),
-      quantity: Number(quantity),
+      price,
+      quantity,
     }));
     const asks: OrderBookEntry[] = data.asks.map(([price, quantity]) => ({
-      price: Number(price),
-      quantity: Number(quantity),
+      price,
+      quantity,
     }));
 
     this.#orderBookData.set({ bids, asks });
