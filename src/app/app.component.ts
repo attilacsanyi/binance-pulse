@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'cp-root',
+  selector: 'bp-root',
   template: `
     <div class="min-h-screen bg-gray-100">
       <header class="bg-white shadow-sm">

@@ -30,7 +30,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'cp',
+          prefix: 'bp',
           style: 'camelCase',
         },
       ],
@@ -38,7 +38,7 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'cp',
+          prefix: 'bp',
           style: 'kebab-case',
         },
       ],

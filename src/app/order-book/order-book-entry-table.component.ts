@@ -2,7 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'cp-order-book-entry-table',
+  selector: 'bp-order-book-entry-table',
   template: `
     <h3 class="text-lg font-bold">{{ title() }}</h3>
     <table>

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'cp-trading-pair-selector',
+  selector: 'bp-trading-pair-selector',
   template: `
     @if (tradingPairs(); as tradingPairs) {
       <select (change)="addTradingPair($event)">

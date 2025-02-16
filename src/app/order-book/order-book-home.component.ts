@@ -6,13 +6,13 @@ import { TradingPairSelectorComponent } from './trading-pair-selector.component'
 @Component({
   template: `
     <h2 class="text-xl font-bold text-gray-900">Order Book</h2>
-    <cp-trading-pair-selector
+    <bp-trading-pair-selector
       [tradingPairs]="tradingPairs()"
       (pairSelected)="addOrderBookSymbol($event)"
     />
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       @for (symbol of orderBookSymbols(); track symbol) {
-        <cp-order-book-card
+        <bp-order-book-card
           [symbol]="symbol"
           (remove)="removeOrderBookSymbol($event)"
         />

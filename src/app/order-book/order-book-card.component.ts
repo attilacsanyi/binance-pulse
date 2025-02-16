@@ -11,15 +11,15 @@ import { OrderBookEntryTableComponent } from './order-book-entry-table.component
 import { OrderBookWSService } from './order-book-ws.service';
 
 @Component({
-  selector: 'cp-order-book-card',
+  selector: 'bp-order-book-card',
   template: `
     <h2 class="text-xl font-bold text-gray-900">{{ symbol() | uppercase }}</h2>
     @if (orderBookData(); as orderBookData) {
-      <cp-order-book-entry-table
+      <bp-order-book-entry-table
         title="Bids"
         [entries]="orderBookData.bids"
       />
-      <cp-order-book-entry-table
+      <bp-order-book-entry-table
         title="Asks"
         [entries]="orderBookData.asks"
       />
