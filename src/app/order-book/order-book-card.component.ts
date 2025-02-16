@@ -1,4 +1,4 @@
-import { UpperCasePipe } from '@angular/common';
+import { DecimalPipe, UpperCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,8 +26,8 @@ import { OrderBookWSService } from './order-book-ws.service';
         <tbody>
           @for (bid of orderBookData.bids; track bid.price) {
             <tr>
-              <td>{{ bid.price }}</td>
-              <td>{{ bid.quantity }}</td>
+              <td>{{ bid.price | number: '1.1-6' }}</td>
+              <td>{{ bid.quantity | number: '1.1-3' }}</td>
             </tr>
           }
         </tbody>
@@ -44,8 +44,8 @@ import { OrderBookWSService } from './order-book-ws.service';
         <tbody>
           @for (ask of orderBookData.asks; track ask.price) {
             <tr>
-              <td>{{ ask.price }}</td>
-              <td>{{ ask.quantity }}</td>
+              <td>{{ ask.price | number: '1.1-6' }}</td>
+              <td>{{ ask.quantity | number: '1.1-3' }}</td>
             </tr>
           }
         </tbody>
@@ -55,7 +55,7 @@ import { OrderBookWSService } from './order-book-ws.service';
       <div>Waiting for order book data...</div>
     }
   `,
-  imports: [UpperCasePipe],
+  imports: [UpperCasePipe, DecimalPipe],
   providers: [OrderBookWSService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
