@@ -5,6 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { BinanceService } from '../binance.service';
 
 @Component({
@@ -35,7 +36,11 @@ export class TradingPairSelectorComponent {
 
   readonly #binanceService = inject(BinanceService);
 
-  tradingPairs = toSignal(this.#binanceService.getTradingPairs());
+  tradingPairs = toSignal(
+    this.#binanceService
+      .getTradingPairs()
+      .pipe(map(pairs => pairs.map(pair => ({ symbol: pair })))),
+  );
 
   addTradingPair(event: Event) {
     const target = event.target as HTMLSelectElement;

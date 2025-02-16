@@ -2,10 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 
-interface TradingPair {
-  symbol: string;
-}
-
 interface BinanceSymbol {
   symbol: string;
   isSpotTradingAllowed: boolean;
@@ -22,7 +18,7 @@ interface ExchangeInfoResponse {
 export class BinanceService {
   readonly #http = inject(HttpClient);
 
-  getTradingPairs(quoteAssetParam = 'ETH'): Observable<TradingPair[]> {
+  getTradingPairs(quoteAssetParam = 'ETH'): Observable<string[]> {
     return this.#http
       .get<ExchangeInfoResponse>(
         `https://api.binance.com/api/v3/exchangeInfo?symbolStatus=TRADING`,
@@ -35,7 +31,7 @@ export class BinanceService {
                 symbol.isSpotTradingAllowed &&
                 symbol.quoteAsset === quoteAssetParam,
             )
-            .map(({ symbol }) => ({ symbol })),
+            .map(({ symbol }) => symbol),
         ),
         catchError(error => {
           console.error('Error fetching trading pairs:', error);
