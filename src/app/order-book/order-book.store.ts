@@ -43,7 +43,7 @@ export const OrderBookStore = signalStore(
           .getTradingPairs()
           .pipe(takeUntilDestroyed())
           .subscribe(pairs => {
-            patchState(store, state => ({
+            patchState(store, _state => ({
               tradingPairs: pairs.map(pair => ({ symbol: pair })),
             }));
           });
