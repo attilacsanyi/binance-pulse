@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TradingPairSelectorComponent } from '../trading-pair-selector.component';
 import { OrderBookCardComponent } from './order-book-card.component';
-import { OrderBookStoreService } from './order-book-store.service';
+import { OrderBookStore } from './order-book.store';
 
 @Component({
   template: `
@@ -17,19 +17,19 @@ import { OrderBookStoreService } from './order-book-store.service';
     </div>
   `,
   imports: [TradingPairSelectorComponent, OrderBookCardComponent],
-  providers: [OrderBookStoreService],
+  providers: [OrderBookStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class OrderBookHomeComponent {
-  readonly #orderBookStoreService = inject(OrderBookStoreService);
+  readonly #orderBookStore = inject(OrderBookStore);
 
-  orderBookSymbols = this.#orderBookStoreService.orderBookSymbols;
+  orderBookSymbols = this.#orderBookStore.orderBookSymbols;
 
   addOrderBookSymbol(symbol: string) {
-    this.#orderBookStoreService.addOrderBookSymbol(symbol);
+    this.#orderBookStore.addOrderBookSymbol(symbol);
   }
 
   removeOrderBookSymbol(symbol: string) {
-    this.#orderBookStoreService.removeOrderBookSymbol(symbol);
+    this.#orderBookStore.removeOrderBookSymbol(symbol);
   }
 }

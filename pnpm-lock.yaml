@@ -32,6 +32,9 @@ importers:
       '@angular/router':
         specifier: 19.1.0
         version: 19.1.0(@angular/common@19.1.0(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@19.1.0(@angular/animations@19.1.0(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@19.1.0(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0)
+      '@ngrx/signals':
+        specifier: 19.0.1
+        version: 19.0.1(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
       rxjs:
         specifier: 7.8.0
         version: 7.8.0
@@ -2317,6 +2320,15 @@ packages:
     resolution: {integrity: sha512-Z9nhchO9ZdqFpAVT6+cQMNAyt+MdhAalK4mCmCAe88YflHzZ0x8npevnZxtN4tytbW9nF4mywRMlP04BWOl5Ig==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
+
+  '@ngrx/signals@19.0.1':
+    resolution: {integrity: sha512-e9cGgF//tIyN1PKDDcBQkI0csxRcw4r9ezTtDzQpM2gPU5frD9JxaW/YU5gM02ZMl97bUMoI82fBtnDN0RtyWg==}
+    peerDependencies:
+      '@angular/core': ^19.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    peerDependenciesMeta:
+      rxjs:
+        optional: true
 
   '@ngtools/webpack@19.1.0':
     resolution: {integrity: sha512-S15w2Zn1svH5XhLQWYfNWomcYA1fDCBL3drNJNQql3B/J3IZYItgQj6OGCOa6JbdQO2o5bac8w3v1C0qrP6c/g==}
@@ -12520,6 +12532,13 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@ngrx/signals@19.0.1(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)':
+    dependencies:
+      '@angular/core': 19.1.0(rxjs@7.8.0)(zone.js@0.15.0)
+      tslib: 2.3.0
+    optionalDependencies:
+      rxjs: 7.8.0
 
   '@ngtools/webpack@19.1.0(@angular/compiler-cli@19.1.0(@angular/compiler@19.1.0(@angular/core@19.1.0(rxjs@7.8.0)(zone.js@0.15.0)))(typescript@5.7.2))(typescript@5.7.2)(webpack@5.97.1(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.24.2))':
     dependencies:
