@@ -18,8 +18,9 @@ interface OrderBookEntryVM {
 @Component({
   selector: 'bp-order-book-entry-table',
   template: `
-    <h3 class="my-4 text-lg font-bold">{{ title() }}</h3>
+    <h3 class="mb-4 pl-4 text-lg font-bold">{{ title() }}</h3>
     <table
+      class="entry-table"
       mat-table
       [dataSource]="entries()"
     >
@@ -51,8 +52,28 @@ interface OrderBookEntryVM {
     </table>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
     :host {
       display: contents;
+    }
+
+    .entry-table {
+      // https://material.angular.io/components/table/styling
+      @include mat.table-overrides(
+        (
+          header-container-height: 2rem,
+          row-item-container-height: 2rem,
+          header-headline-size: var(--mat-sys-title-medium-size),
+          row-item-label-text-size: var(--mat-sys-body-small-size),
+        )
+      );
+
+      // https://material.angular.io/components/table/overview#row-templates
+      .mat-mdc-row .mat-mdc-cell {
+        border-bottom: none;
+        border-top: none;
+      }
     }
   `,
   imports: [MatTableModule],
@@ -73,7 +94,7 @@ export class OrderBookEntryTableComponent {
     },
     {
       columnDef: 'quantity',
-      header: 'Quantity',
+      header: 'Qty',
       cell: (element: OrderBookEntryVM) =>
         `${this.#decimalPipe.transform(element.quantity, '1.1-3')}`,
     },
