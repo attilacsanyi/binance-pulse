@@ -5,7 +5,7 @@ import { TradingPairSelectorComponent } from './trading-pair-selector.component'
 
 @Component({
   template: `
-    <h2 class="text-xl font-bold text-gray-900">Order Book</h2>
+    <h2 class="text-xl font-bold">Order Book</h2>
     <bp-trading-pair-selector
       [tradingPairs]="tradingPairs()"
       (pairSelected)="addOrderBookSymbol($event)"

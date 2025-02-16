@@ -13,7 +13,7 @@ import { OrderBookWSService } from './order-book-ws.service';
 @Component({
   selector: 'bp-order-book-card',
   template: `
-    <h2 class="text-xl font-bold text-gray-900">{{ symbol() | uppercase }}</h2>
+    <h2 class="text-xl font-bold ">{{ symbol() | uppercase }}</h2>
     @if (orderBookData(); as orderBookData) {
       <bp-order-book-entry-table
         title="Bids"
