@@ -1,12 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
+  input,
   output,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
-import { BinanceService } from '../binance.service';
 
 @Component({
   selector: 'cp-trading-pair-selector',
@@ -32,21 +29,14 @@ import { BinanceService } from '../binance.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingPairSelectorComponent {
-  symbolSelected = output<string>();
-
-  readonly #binanceService = inject(BinanceService);
-
-  tradingPairs = toSignal(
-    this.#binanceService
-      .getTradingPairs()
-      .pipe(map(pairs => pairs.map(pair => ({ symbol: pair })))),
-  );
+  tradingPairs = input.required<{ symbol: string }[] | undefined>();
+  pairSelected = output<string>();
 
   addTradingPair(event: Event) {
     const target = event.target as HTMLSelectElement;
     const tradingPairToAdd = target.value;
     if (tradingPairToAdd) {
-      this.symbolSelected.emit(tradingPairToAdd);
+      this.pairSelected.emit(tradingPairToAdd);
     }
   }
 }
