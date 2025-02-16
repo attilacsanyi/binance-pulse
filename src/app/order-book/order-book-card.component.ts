@@ -30,7 +30,6 @@ import { OrderBookWSService } from './order-book-ws.service';
   `,
   imports: [UpperCasePipe, OrderBookEntryTableComponent],
   providers: [OrderBookWSService],
-  // TODO: make this OnPush
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderBookCardComponent implements OnInit {
