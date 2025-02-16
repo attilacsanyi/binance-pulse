@@ -5,7 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BinanceService } from './binance.service';
+import { BinanceService } from '../binance.service';
 
 @Component({
   selector: 'cp-trading-pair-selector',
