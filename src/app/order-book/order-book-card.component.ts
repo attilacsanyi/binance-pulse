@@ -1,4 +1,4 @@
-import { DecimalPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +7,7 @@ import {
   OnInit,
   output,
 } from '@angular/core';
+import { OrderBookEntryTableComponent } from './order-book-entry-table.component';
 import { OrderBookWSService } from './order-book-ws.service';
 
 @Component({
@@ -14,48 +15,20 @@ import { OrderBookWSService } from './order-book-ws.service';
   template: `
     <h2 class="text-xl font-bold text-gray-900">{{ symbol() | uppercase }}</h2>
     @if (orderBookData(); as orderBookData) {
-      <!-- Table for bids -->
-      <h3 class="text-lg font-bold">Bids</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Price</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (bid of orderBookData.bids; track bid.price) {
-            <tr>
-              <td>{{ bid.price | number: '1.1-6' }}</td>
-              <td>{{ bid.quantity | number: '1.1-3' }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-      <!-- Table for asks -->
-      <h3 class="text-lg font-bold">Asks</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Price</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (ask of orderBookData.asks; track ask.price) {
-            <tr>
-              <td>{{ ask.price | number: '1.1-6' }}</td>
-              <td>{{ ask.quantity | number: '1.1-3' }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
+      <cp-order-book-entry-table
+        title="Bids"
+        [entries]="orderBookData.bids"
+      />
+      <cp-order-book-entry-table
+        title="Asks"
+        [entries]="orderBookData.asks"
+      />
       <button (click)="removeOrderBook()">Remove</button>
     } @else {
       <div>Waiting for order book data...</div>
     }
   `,
-  imports: [UpperCasePipe, DecimalPipe],
+  imports: [UpperCasePipe, OrderBookEntryTableComponent],
   providers: [OrderBookWSService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
