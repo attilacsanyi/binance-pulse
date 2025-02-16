@@ -30,22 +30,23 @@ import { OrderBookWSService } from './order-book-ws.service';
   `,
   imports: [UpperCasePipe, OrderBookEntryTableComponent],
   providers: [OrderBookWSService],
+  // TODO: make this OnPush
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderBookCardComponent implements OnInit {
   symbol = input.required<string>();
   remove = output<string>();
 
-  readonly #orderBookService = inject(OrderBookWSService);
+  readonly #orderBookWSService = inject(OrderBookWSService);
 
-  orderBookData = this.#orderBookService.orderBookData;
+  orderBookData = this.#orderBookWSService.orderBookData;
 
   ngOnInit() {
-    this.#orderBookService.connect(this.symbol());
+    this.#orderBookWSService.connect(this.symbol());
   }
 
   removeOrderBook() {
-    this.#orderBookService.disconnect();
+    this.#orderBookWSService.disconnect();
     this.remove.emit(this.symbol());
   }
 }
