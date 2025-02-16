@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         </tr>
       </thead>
       <tbody>
-        @for (entry of entries(); track entry) {
+        @for (entry of entries(); track entry.price) {
           <tr>
             <td>{{ entry.price }}</td>
             <td>{{ entry.quantity | number: '1.1-3' }}</td>
