@@ -21,14 +21,20 @@ import { OrderBookWSService } from './order-book-ws.service';
       </mat-card-header>
       <mat-card-content>
         @if (orderBookData(); as orderBookData) {
-          <bp-order-book-entry-table
-            title="Bids"
-            [entries]="orderBookData.bids"
-          />
-          <bp-order-book-entry-table
-            title="Asks"
-            [entries]="orderBookData.asks"
-          />
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+              <bp-order-book-entry-table
+                title="Bids"
+                [entries]="orderBookData.bids"
+              />
+            </div>
+            <div>
+              <bp-order-book-entry-table
+                title="Asks"
+                [entries]="orderBookData.asks"
+              />
+            </div>
+          </div>
         } @else {
           <div>Waiting for order book data...</div>
         }
