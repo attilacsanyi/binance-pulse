@@ -27,7 +27,7 @@ export default class OrderBookHomeComponent {
   readonly #orderBookStore = inject(OrderBookStore);
 
   orderBookSymbols = this.#orderBookStore.orderBookSymbols;
-  tradingPairs = this.#orderBookStore.tradingPairs;
+  tradingPairs = this.#orderBookStore.sortedTradingPairs;
 
   addOrderBookSymbol(symbol: string) {
     this.#orderBookStore.addOrderBookSymbol(symbol);

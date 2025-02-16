@@ -1,8 +1,9 @@
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   patchState,
   signalStore,
+  withComputed,
   withHooks,
   withMethods,
   withState,
@@ -20,19 +21,27 @@ interface OrderBookStore {
 
 export const OrderBookStore = signalStore(
   withState<OrderBookStore>({ orderBookSymbols: [], tradingPairs: undefined }),
+  withComputed(store => ({
+    sortedTradingPairs: computed(() =>
+      store.tradingPairs()?.sort((a, b) => a.symbol.localeCompare(b.symbol)),
+    ),
+  })),
   withMethods(store => ({
     addOrderBookSymbol(symbol: string): void {
       patchState(store, state => ({
         orderBookSymbols: [...state.orderBookSymbols, symbol],
+        tradingPairs: state.tradingPairs?.filter(
+          pair => pair.symbol !== symbol,
+        ),
       }));
     },
     removeOrderBookSymbol(symbol: string): void {
       patchState(store, state => ({
         orderBookSymbols: state.orderBookSymbols.filter(s => s !== symbol),
+        tradingPairs: [...(state.tradingPairs || []), { symbol }],
       }));
     },
   })),
-
   withHooks(store => {
     const binanceService = inject(BinanceService);
 
