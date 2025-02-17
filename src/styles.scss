@@ -1,8 +1,17 @@
+/* Tailwind */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+/* Material */
+
+/* Issue with material & tailwind combination
+ * https://medium.com/@anuroop.suresh/angular-19-scss-angular-material-tailwind-made-easy-6ea8a3927fda
+*/
+.mat-mdc-notch-piece {
+  border: none;
+}
 
 html {
   color-scheme: light dark;
