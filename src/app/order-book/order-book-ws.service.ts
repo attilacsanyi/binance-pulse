@@ -2,7 +2,7 @@ import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { environment } from '@env';
 import { of, timer } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
 
 interface OrderBookEntry {
@@ -37,7 +37,12 @@ export class OrderBookWSService {
     return this.#orderBookData.asReadonly();
   }
 
-  connect(symbol: string): void {
+  /**
+   * Connect to the order book WebSocket server for a given symbol.
+   * @param symbol The symbol to connect to.
+   * @param throttleTimeMs The time to throttle the messages.
+   */
+  connect(symbol: string, throttleTimeMs = 2000): void {
     const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
     /** https://rxjs.dev/api/webSocket/webSocket#websocket */
     const websocket$ = webSocket<OrderBookMessage | null>({
@@ -75,6 +80,7 @@ export class OrderBookWSService {
           console.error(`${symbol} WebSocket error:`, error);
           return of(null);
         }),
+        throttleTime(throttleTimeMs),
       )
       .subscribe(message => this.processOrderBookMessage(message));
   }
