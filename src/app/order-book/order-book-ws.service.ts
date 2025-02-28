@@ -1,5 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { environment } from '@env';
+import { webSocket } from 'rxjs/webSocket';
 
 interface OrderBookEntry {
   price: string;
@@ -25,7 +27,7 @@ interface OrderBookMessage {
 
 @Injectable()
 export class OrderBookWSService {
-  #websocket: WebSocket | null = null;
+  readonly #destroyRef = inject(DestroyRef);
   readonly #orderBookData = signal<OrderBookData | undefined>(undefined);
 
   get orderBookData() {
@@ -34,40 +36,29 @@ export class OrderBookWSService {
 
   connect(symbol: string): void {
     const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
-    this.#websocket = new WebSocket(wsUrl);
+    const websocket$ = webSocket<OrderBookMessage>({
+      url: wsUrl,
+      openObserver: {
+        next: () => console.debug(`Connected to ${symbol} WebSocket server`),
+      },
+      closeObserver: {
+        next: () =>
+          console.debug(`Disconnected from ${symbol} WebSocket server`),
+      },
+    });
 
-    this.#websocket.onopen = () => {
-      console.debug(`Connected to ${symbol} WebSocket server`);
-    };
-
-    this.#websocket.onclose = () => {
-      console.debug(`Disconnected from ${symbol} WebSocket server`);
-    };
-
-    this.#websocket.onmessage = event => {
-      this.processOrderBookMessage(event.data);
-    };
-
-    this.#websocket.onerror = error => {
-      console.error(`${symbol} WebSocket error:`, error);
-    };
+    websocket$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+      next: message => this.processOrderBookMessage(message),
+      error: error => console.error(`${symbol} WebSocket error:`, error),
+    });
   }
 
-  disconnect(): void {
-    if (this.#websocket) {
-      this.#websocket.close();
-      this.#websocket = null;
-    }
-  }
-
-  processOrderBookMessage(message: string): void {
-    // TODO: add zod validation with expected schema
-    const data: OrderBookMessage = JSON.parse(message);
-    const bids: OrderBookEntry[] = data.bids.map(([price, quantity]) => ({
+  processOrderBookMessage(message: OrderBookMessage): void {
+    const bids: OrderBookEntry[] = message.bids.map(([price, quantity]) => ({
       price,
       quantity,
     }));
-    const asks: OrderBookEntry[] = data.asks.map(([price, quantity]) => ({
+    const asks: OrderBookEntry[] = message.asks.map(([price, quantity]) => ({
       price,
       quantity,
     }));

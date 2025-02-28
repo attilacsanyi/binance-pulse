@@ -73,7 +73,6 @@ export class OrderBookCardComponent implements OnInit {
   }
 
   removeOrderBook() {
-    this.#orderBookWSService.disconnect();
     this.remove.emit(this.symbol());
   }
 }
