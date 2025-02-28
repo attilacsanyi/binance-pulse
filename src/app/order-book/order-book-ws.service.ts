@@ -1,6 +1,8 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { environment } from '@env';
+import { of, timer } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
 
 interface OrderBookEntry {
@@ -27,8 +29,9 @@ interface OrderBookMessage {
 
 @Injectable()
 export class OrderBookWSService {
+  readonly #reconnectInterval = 5000;
   readonly #destroyRef = inject(DestroyRef);
-  readonly #orderBookData = signal<OrderBookData | undefined>(undefined);
+  readonly #orderBookData = signal<OrderBookData | undefined | null>(undefined);
 
   get orderBookData() {
     return this.#orderBookData.asReadonly();
@@ -36,7 +39,8 @@ export class OrderBookWSService {
 
   connect(symbol: string): void {
     const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
-    const websocket$ = webSocket<OrderBookMessage>({
+    /** https://rxjs.dev/api/webSocket/webSocket#websocket */
+    const websocket$ = webSocket<OrderBookMessage | null>({
       url: wsUrl,
       openObserver: {
         next: () => console.debug(`Connected to ${symbol} WebSocket server`),
@@ -47,13 +51,41 @@ export class OrderBookWSService {
       },
     });
 
-    websocket$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-      next: message => this.processOrderBookMessage(message),
-      error: error => console.error(`${symbol} WebSocket error:`, error),
-    });
+    websocket$
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef),
+        // Force error on first message to test retry logic
+        // tap({
+        //   next: () => {
+        //     throw new Error('Forced error on first message');
+        //   },
+        // }),
+        retry({
+          count: 2,
+          delay: (error, retryAttempt) => {
+            console.warn(
+              `WebSocket connection failed with error '${error}' on attempt ${retryAttempt}. Retrying in ${
+                this.#reconnectInterval / 1000
+              } seconds...`,
+            );
+            return timer(this.#reconnectInterval);
+          },
+        }),
+        catchError(error => {
+          console.error(`${symbol} WebSocket error:`, error);
+          return of(null);
+        }),
+      )
+      .subscribe(message => this.processOrderBookMessage(message));
   }
 
-  processOrderBookMessage(message: OrderBookMessage): void {
+  processOrderBookMessage(message: OrderBookMessage | null): void {
+    // Error case
+    if (!message) {
+      this.#orderBookData.set(null);
+      return;
+    }
+
     const bids: OrderBookEntry[] = message.bids.map(([price, quantity]) => ({
       price,
       quantity,

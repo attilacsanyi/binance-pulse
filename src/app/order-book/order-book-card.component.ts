@@ -36,8 +36,12 @@ import { OrderBookWSService } from './order-book-ws.service';
                 />
               </div>
             </div>
+          } @else if (orderBookData() === null) {
+            <span class="text-sm text-red-500"
+              >Error loading order book data.</span
+            >
           } @else {
-            <span>Waiting for order book data...</span>
+            <span class="text-sm italic">Waiting for order book data...</span>
           }
         </div>
       </mat-card-content>
