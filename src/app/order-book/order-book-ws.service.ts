@@ -26,7 +26,7 @@ interface OrderBookMessage {
 @Injectable()
 export class OrderBookWSService {
   #websocket: WebSocket | null = null;
-  #orderBookData = signal<OrderBookData | undefined>(undefined);
+  readonly #orderBookData = signal<OrderBookData | undefined>(undefined);
 
   get orderBookData() {
     return this.#orderBookData.asReadonly();

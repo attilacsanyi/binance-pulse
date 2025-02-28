@@ -66,7 +66,7 @@ export class OrderBookCardComponent implements OnInit {
 
   readonly #orderBookWSService = inject(OrderBookWSService);
 
-  orderBookData = this.#orderBookWSService.orderBookData;
+  readonly orderBookData = this.#orderBookWSService.orderBookData;
 
   ngOnInit() {
     this.#orderBookWSService.connect(this.symbol());
