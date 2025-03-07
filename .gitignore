@@ -16,6 +16,8 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.cursorrules
+.cursor/
 
 # IDE - VSCode
 .vscode/*
@@ -47,4 +49,3 @@ Thumbs.db
 .netlify
 
 .env
-.cursorrules
