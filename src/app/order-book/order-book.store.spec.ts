@@ -4,11 +4,9 @@ import { BinanceService } from '../binance.service';
 import { OrderBookStore } from './order-book.store';
 
 describe('OrderBookStore', () => {
-  it('should verify that the trading pairs are available', () => {
-    const tradingPairs = ['ADAETH'];
-
+  const setup = (data: { tradingPairs: string[] }) => {
     const binanceService = {
-      getTradingPairs: () => of(tradingPairs),
+      getTradingPairs: () => of(data.tradingPairs),
     };
 
     TestBed.configureTestingModule({
@@ -20,6 +18,10 @@ describe('OrderBookStore', () => {
         },
       ],
     });
+  };
+
+  it('should verify that the trading pairs are stored', () => {
+    setup({ tradingPairs: ['ADAETH'] });
 
     const store = TestBed.inject(OrderBookStore);
 
