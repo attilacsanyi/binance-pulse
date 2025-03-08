@@ -51,5 +51,12 @@ describe('OrderBookStore', () => {
 
       expect(store.orderBookSymbols().includes('ADAETH')).toBe(true);
     });
+
+    it('should verify that the order book symbol is removed', () => {
+      store.addOrderBookSymbol('ADAETH');
+      store.removeOrderBookSymbol('ADAETH');
+
+      expect(store.orderBookSymbols().includes('ADAETH')).toBe(false);
+    });
   });
 });
