@@ -40,4 +40,16 @@ describe('OrderBookStore', () => {
       ]);
     });
   });
+
+  describe('orderBookSymbols', () => {
+    it('should verify that the order book symbol is empty', () => {
+      expect(store.orderBookSymbols().length).toEqual(0);
+    });
+
+    it('should verify that the order book symbol is added', () => {
+      store.addOrderBookSymbol('ADAETH');
+
+      expect(store.orderBookSymbols().includes('ADAETH')).toBe(true);
+    });
+  });
 });
