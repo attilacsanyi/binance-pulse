@@ -27,4 +27,15 @@ describe('OrderBookStore', () => {
 
     expect(store.tradingPairs()).toEqual([{ symbol: 'ADAETH' }]);
   });
+
+  it('should verify that that sorted trading pairs are correctly sorted', () => {
+    setup({ tradingPairs: ['BTCETH', 'ADAETH'] });
+
+    const store = TestBed.inject(OrderBookStore);
+
+    expect(store.sortedTradingPairs()).toEqual([
+      { symbol: 'ADAETH' },
+      { symbol: 'BTCETH' },
+    ]);
+  });
 });
