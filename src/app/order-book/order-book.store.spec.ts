@@ -24,18 +24,20 @@ describe('OrderBookStore', () => {
     store = TestBed.inject(OrderBookStore);
   };
 
-  it('should verify that the trading pairs are stored', () => {
-    setup({ tradingPairs: ['ADAETH'] });
+  describe('tradingPairs', () => {
+    it('should verify that the trading pairs are stored', () => {
+      setup({ tradingPairs: ['ADAETH'] });
 
-    expect(store.tradingPairs()).toEqual([{ symbol: 'ADAETH' }]);
-  });
+      expect(store.tradingPairs()).toEqual([{ symbol: 'ADAETH' }]);
+    });
 
-  it('should verify that that sorted trading pairs are correctly sorted', () => {
-    setup({ tradingPairs: ['BTCETH', 'ADAETH'] });
+    it('should verify that that sorted trading pairs are correctly sorted', () => {
+      setup({ tradingPairs: ['BTCETH', 'ADAETH'] });
 
-    expect(store.sortedTradingPairs()).toEqual([
-      { symbol: 'ADAETH' },
-      { symbol: 'BTCETH' },
-    ]);
+      expect(store.sortedTradingPairs()).toEqual([
+        { symbol: 'ADAETH' },
+        { symbol: 'BTCETH' },
+      ]);
+    });
   });
 });
