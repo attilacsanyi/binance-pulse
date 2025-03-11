@@ -4,7 +4,7 @@
 
 Real-time order book visualization for Binance trading pairs.
 
-## Features
+## Features `Order Book`
 
 - Real-time order book data via WebSocket connection
 - Multiple order book views simultaneously
