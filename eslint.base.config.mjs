@@ -4,6 +4,8 @@ export default [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...nx.configs['flat/angular'],
+  ...nx.configs['flat/angular-template'],
   {
     ignores: ['**/dist'],
   },
@@ -25,17 +27,34 @@ export default [
     },
   },
   {
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.cts',
-      '**/*.mts',
-      '**/*.js',
-      '**/*.jsx',
-      '**/*.cjs',
-      '**/*.mjs',
-    ],
-    // Override or add rules here
-    rules: {},
+    files: ['**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'bp',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'bp',
+          style: 'kebab-case',
+        },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    files: ['**/*.html'],
+    rules: {
+      '@angular-eslint/template/attributes-order': 'error',
+    },
   },
 ];
