@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@bp/core": ["libs/core/src/index.ts"],
       "@bp/order-book": ["libs/order-book/src/index.ts"]
     }
   },
