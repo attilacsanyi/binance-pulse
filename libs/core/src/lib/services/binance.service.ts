@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { environment } from '../../../../../src/environments/environment';
+import { ENV } from '../env';
 
 interface BinanceSymbol {
   symbol: string;
@@ -18,11 +18,12 @@ interface ExchangeInfoResponse {
 })
 export class BinanceService {
   readonly #http = inject(HttpClient);
+  readonly #env = inject(ENV);
 
   getTradingPairs(quoteAssetParam = 'ETH'): Observable<string[]> {
     return this.#http
       .get<ExchangeInfoResponse>(
-        `${environment.binanceApiUrl}/exchangeInfo?symbolStatus=TRADING`,
+        `${this.#env.binanceApiUrl}/exchangeInfo?symbolStatus=TRADING`,
       )
       .pipe(
         map(response =>

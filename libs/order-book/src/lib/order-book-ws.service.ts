@@ -1,9 +1,9 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ENV } from '@bp/core';
 import { of, timer } from 'rxjs';
 import { catchError, retry, throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
-import { environment } from '../../../../src/environments/environment';
 
 interface OrderBookEntry {
   price: string;
@@ -34,6 +34,7 @@ interface OrderBookMessage {
 
 @Injectable()
 export class OrderBookWSService {
+  readonly #env = inject(ENV);
   readonly #reconnectInterval = 5000;
   readonly #destroyRef = inject(DestroyRef);
   readonly #orderBookData = signal<OrderBookData | undefined | null>(undefined);
@@ -46,7 +47,7 @@ export class OrderBookWSService {
    * @param throttleTimeMs The time to throttle the messages.
    */
   connect(symbol: string, throttleTimeMs = 2000): void {
-    const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
+    const wsUrl = `${this.#env.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
     /** https://rxjs.dev/api/webSocket/webSocket#websocket */
     const websocket$ = webSocket<OrderBookMessage | null>({
       url: wsUrl,

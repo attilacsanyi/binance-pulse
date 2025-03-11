@@ -1,5 +1,5 @@
-import { commonEnv, Env } from './env';
+import { commonEnv } from '@bp/core';
 
-export const environment: Env = {
+export const environment: typeof commonEnv = {
   ...commonEnv,
 };
