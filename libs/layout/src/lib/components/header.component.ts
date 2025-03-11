@@ -1,8 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './navbar.component';
 
 @Component({
   selector: 'bp-header',
@@ -24,49 +24,18 @@ import { RouterModule } from '@angular/router';
         <div class="my-4">
           <mat-divider />
         </div>
-        <nav class="flex gap-4">
-          @for (
-            navItem of navItems;
-            track navItem.routerLink;
-            let last = $last
-          ) {
-            <a
-              routerLinkActive="active hover:animate-none"
-              class="flex items-center gap-2 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:animate-pulse"
-              [routerLink]="navItem.routerLink"
-              [routerLinkActiveOptions]="{ exact: true }"
-              ><mat-icon>{{ navItem.icon }}</mat-icon
-              >{{ navItem.label }}</a
-            >
-            @if (!last) {
-              <mat-divider [vertical]="true"></mat-divider>
-            }
-          }
-        </nav>
       </div>
     </header>
+    <bp-navbar />
   `,
   styles: `
     .active {
       color: var(--mat-sys-on-primary-container);
     }
   `,
-  imports: [RouterModule, NgOptimizedImage, MatIconModule, MatDividerModule],
+  imports: [RouterModule, NgOptimizedImage, MatDividerModule, NavbarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   title = 'Binance Pulse';
-
-  readonly navItems = [
-    {
-      label: 'Home',
-      icon: 'home',
-      routerLink: '/',
-    },
-    {
-      label: 'Order Book',
-      icon: 'list_alt',
-      routerLink: '/order-book',
-    },
-  ];
 }

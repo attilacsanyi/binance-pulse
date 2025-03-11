@@ -15,6 +15,4 @@ import { HeaderComponent } from '@bp/layout';
   imports: [RouterOutlet, HeaderComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'Binance Pulse';
-}
+export class AppComponent {}
