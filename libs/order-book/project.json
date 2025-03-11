@@ -4,7 +4,7 @@
   "sourceRoot": "libs/order-book/src",
   "prefix": "bp",
   "projectType": "library",
-  "tags": [],
+  "tags": ["feature"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

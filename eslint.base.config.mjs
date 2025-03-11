@@ -18,8 +18,28 @@ export default [
           enforceBuildableLibDependency: true,
           depConstraints: [
             {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+              sourceTag: 'app',
+              onlyDependOnLibsWithTags: ['core', 'layout', 'feature'],
+            },
+            {
+              sourceTag: 'core',
+              onlyDependOnLibsWithTags: [],
+            },
+            {
+              sourceTag: 'layout',
+              onlyDependOnLibsWithTags: ['core', 'pattern', 'ui'],
+            },
+            {
+              sourceTag: 'feature',
+              onlyDependOnLibsWithTags: ['core', 'pattern', 'ui'],
+            },
+            {
+              sourceTag: 'pattern',
+              onlyDependOnLibsWithTags: ['core', 'ui'],
+            },
+            {
+              sourceTag: 'ui',
+              onlyDependOnLibsWithTags: [],
             },
           ],
         },
