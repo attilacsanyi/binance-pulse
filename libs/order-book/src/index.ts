@@ -1,3 +1,3 @@
-import { orderBookRoutes } from './lib/lib.routes';
+import { orderBookRoutes } from './lib/order-book.routes';
 
 export default orderBookRoutes;

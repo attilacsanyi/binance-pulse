@@ -1,9 +1,9 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { environment } from '../../environments/environment';
 import { of, timer } from 'rxjs';
 import { catchError, retry, throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
+import { environment } from '../../../../src/environments/environment';
 
 interface OrderBookEntry {
   price: string;

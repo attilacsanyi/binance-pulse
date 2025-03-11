@@ -8,7 +8,7 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { BinanceService } from '../binance.service';
+import { BinanceService } from '../../../../src/app/binance.service';
 
 export interface TradingPair {
   symbol: string;

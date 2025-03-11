@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BinanceService } from '../binance.service';
+import { BinanceService } from '../../../../src/app/binance.service';
 import { OrderBookStore } from './order-book.store';
 
 describe('OrderBookStore', () => {

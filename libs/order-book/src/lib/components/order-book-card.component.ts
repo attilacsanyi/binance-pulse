@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { OrderBookWSService } from '../order-book-ws.service';
 import { OrderBookEntryTableComponent } from './order-book-entry-table.component';
-import { OrderBookWSService } from './order-book-ws.service';
 
 @Component({
   selector: 'bp-order-book-card',
