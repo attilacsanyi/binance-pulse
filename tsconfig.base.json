@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@bp/core": ["libs/core/src/index.ts"],
+      "@bp/layout": ["libs/layout/src/index.ts"],
       "@bp/order-book": ["libs/order-book/src/index.ts"]
     }
   },
