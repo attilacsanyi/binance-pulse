@@ -52,5 +52,20 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "binance-pulse"
+  "defaultProject": "binance-pulse",
+  "release": {
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": true,
+      "createRelease": "github"
+    },
+    "projectsRelationship": "fixed",
+    "groups": {
+      "default": {
+        "projects": ["binance-pulse"]
+      }
+    }
+  }
 }
