@@ -24,13 +24,13 @@ import { NavbarComponent } from './navbar.component';
         <div class="my-4">
           <mat-divider />
         </div>
+        <bp-navbar />
       </div>
     </header>
-    <bp-navbar />
   `,
   styles: `
-    .active {
-      color: var(--mat-sys-on-primary-container);
+    :host {
+      display: contents;
     }
   `,
   imports: [RouterModule, NgOptimizedImage, MatDividerModule, NavbarComponent],
