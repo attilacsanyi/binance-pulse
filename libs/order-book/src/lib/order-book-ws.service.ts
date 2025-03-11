@@ -38,9 +38,7 @@ export class OrderBookWSService {
   readonly #destroyRef = inject(DestroyRef);
   readonly #orderBookData = signal<OrderBookData | undefined | null>(undefined);
 
-  get orderBookData() {
-    return this.#orderBookData.asReadonly();
-  }
+  readonly orderBookData = this.#orderBookData.asReadonly();
 
   /**
    * Connect to the order book WebSocket server for a given symbol.
