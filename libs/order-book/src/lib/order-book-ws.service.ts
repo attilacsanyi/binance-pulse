@@ -10,7 +10,12 @@ interface OrderBookEntry {
   quantity: string;
 }
 
-interface OrderBookData {
+/**
+ * TODO: need to export this interface
+ * Issue in order-book-card.component.ts:
+ *   Public property 'orderBookData' of exported class has or is using name 'OrderBookData' from external module "...order-book-ws.service" but cannot be named.
+ */
+export interface OrderBookData {
   bids: OrderBookEntry[];
   asks: OrderBookEntry[];
 }
