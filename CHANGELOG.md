@@ -1,3 +1,14 @@
+## 0.2.0 (2025-03-11)
+
+### 🚀 Features
+
+- **home:** create home page component with welcome message ([5adc53c](https://github.com/attilacsanyi/binance-pulse/commit/5adc53c))
+- **order-book:** introduce nx module boundaries ([#1](https://github.com/attilacsanyi/binance-pulse/pull/1))
+
+### ❤️ Thank You
+
+- Attila Csanyi @attilacsanyi
+
 ## 0.1.0 (2025-03-11)
 
 ### 🚀 Features
