@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from './home.component';
+import { HomePageComponent } from './home-page.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomePageComponent,
   },
   {
     path: 'order-book',
