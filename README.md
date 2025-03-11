@@ -20,8 +20,15 @@ Real-time order book visualization for Binance trading pairs.
 - Local production demo: `pnpm demo` (using `http-server`)
 - Test: `pnpm test`
 - Lint: `pnpm lint`
+- Dependency graph: `pnpm graph`
 
 ## Developer Notes
+
+### Modules
+
+1. `core`
+2. `layout`
+3. `order-book`
 
 ### WebSocket Connection
 
