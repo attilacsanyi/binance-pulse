@@ -3,6 +3,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCardHarness } from '@angular/material/card/testing';
+import { commonEnv, ENV } from '@bp/core';
 import { OrderBookCardComponent } from './order-book-card.component';
 import { OrderBookEntryTableComponent } from './order-book-entry-table.component';
 
@@ -13,6 +14,12 @@ describe('OrderBookCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OrderBookCardComponent, OrderBookEntryTableComponent],
+      providers: [
+        {
+          provide: ENV,
+          useValue: commonEnv,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderBookCardComponent);

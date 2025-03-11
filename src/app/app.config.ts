@@ -7,6 +7,8 @@ import {
   provideRouter,
   withPreloading,
 } from '@angular/router';
+import { ENV } from '@bp/core';
+import { environment } from '../environments/environment';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -15,6 +17,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     provideAnimationsAsync(),
+    {
+      provide: ENV,
+      useValue: environment,
+    },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline', floatLabel: 'auto' },

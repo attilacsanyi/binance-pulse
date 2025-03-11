@@ -1,5 +1,6 @@
 import { computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BinanceService } from '@bp/core';
 import {
   patchState,
   signalStore,
@@ -8,7 +9,6 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { BinanceService } from '../binance.service';
 
 export interface TradingPair {
   symbol: string;

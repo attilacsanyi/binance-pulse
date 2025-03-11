@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { environment } from '@env';
+import { ENV } from '@bp/core';
 import { of, timer } from 'rxjs';
 import { catchError, retry, throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
@@ -10,7 +10,12 @@ interface OrderBookEntry {
   quantity: string;
 }
 
-interface OrderBookData {
+/**
+ * TODO: need to export this interface
+ * Issue in order-book-card.component.ts:
+ *   Public property 'orderBookData' of exported class has or is using name 'OrderBookData' from external module "...order-book-ws.service" but cannot be named.
+ */
+export interface OrderBookData {
   bids: OrderBookEntry[];
   asks: OrderBookEntry[];
 }
@@ -29,13 +34,12 @@ interface OrderBookMessage {
 
 @Injectable()
 export class OrderBookWSService {
+  readonly #env = inject(ENV);
   readonly #reconnectInterval = 5000;
   readonly #destroyRef = inject(DestroyRef);
   readonly #orderBookData = signal<OrderBookData | undefined | null>(undefined);
 
-  get orderBookData() {
-    return this.#orderBookData.asReadonly();
-  }
+  readonly orderBookData = this.#orderBookData.asReadonly();
 
   /**
    * Connect to the order book WebSocket server for a given symbol.
@@ -43,7 +47,7 @@ export class OrderBookWSService {
    * @param throttleTimeMs The time to throttle the messages.
    */
   connect(symbol: string, throttleTimeMs = 2000): void {
-    const wsUrl = `${environment.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
+    const wsUrl = `${this.#env.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
     /** https://rxjs.dev/api/webSocket/webSocket#websocket */
     const websocket$ = webSocket<OrderBookMessage | null>({
       url: wsUrl,
