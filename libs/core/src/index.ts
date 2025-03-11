@@ -1,1 +1,1 @@
-export * from './lib/core.component';
+export * from './lib/services/binance.service';
