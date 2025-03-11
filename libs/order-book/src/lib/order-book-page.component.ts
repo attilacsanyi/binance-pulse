@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { OrderBookStore } from '../order-book.store';
-import { TradingPairSelectorComponent } from '../trading-pair-selector.component';
-import { OrderBookCardComponent } from './order-book-card.component';
+import { OrderBookCardComponent } from './components/order-book-card.component';
+import { TradingPairSelectorComponent } from './components/trading-pair-selector.component';
+import { OrderBookStore } from './order-book.store';
 
 @Component({
   template: `
