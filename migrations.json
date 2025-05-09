@@ -58,6 +58,46 @@
       "subject": "chore: sync lock file"
     },
     "targetVersion": "latest",
-    "confirmedPackageUpdates": true
+    "confirmedPackageUpdates": true,
+    "completedMigrations": {
+      "remove-legacy-cache": {
+        "type": "skipped"
+      },
+      "remove-custom-tasks-runner": {
+        "type": "skipped"
+      },
+      "release-version-config-changes": {
+        "type": "skipped"
+      },
+      "release-changelog-config-changes": {
+        "type": "skipped"
+      },
+      "replace-getJestProjects-with-getJestProjectsAsync-v21": {
+        "type": "successful",
+        "name": "replace-getJestProjects-with-getJestProjectsAsync-v21",
+        "changedFiles": [],
+        "ref": "2d374603cabd0669c07e779c34386d2f3bc52e50",
+        "nextSteps": []
+      },
+      "remove-tsconfig-option-from-jest-executor": {
+        "type": "successful",
+        "name": "remove-tsconfig-option-from-jest-executor",
+        "changedFiles": [
+          {
+            "path": "nx.json",
+            "type": "UPDATE"
+          },
+          {
+            "path": "tsconfig.base.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "fdf02df818a0666210bd61abee615a191a61fa09",
+        "nextSteps": []
+      }
+    },
+    "runningMigrations": [
+      "remove-tsconfig-option-from-jest-executor"
+    ]
   }
 }
