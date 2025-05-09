@@ -5,16 +5,22 @@
   "projectType": "application",
   "prefix": "bp",
   "sourceRoot": "./src",
-  "tags": ["app"],
+  "tags": [
+    "app"
+  ],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/binance-pulse",
         "index": "./src/index.html",
         "browser": "./src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -70,7 +76,8 @@
           "port": 4300
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -82,12 +89,16 @@
       "executor": "@nx/eslint:lint",
       "options": {
         "maxWarnings": 0,
-        "lintFilePatterns": ["./src"]
+        "lintFilePatterns": [
+          "./src"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectName}"
+      ],
       "options": {
         "jestConfig": "jest.config.app.ts"
       },

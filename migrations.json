@@ -92,12 +92,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "fdf02df818a0666210bd61abee615a191a61fa09",
+        "ref": "5785fdde2021dac35412d19d346683eef82e0ab4",
+        "nextSteps": []
+      },
+      "set-continuous-option": {
+        "type": "successful",
+        "name": "set-continuous-option",
+        "changedFiles": [
+          {
+            "path": "project.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "10f18f110f7f047650eb8664d0926cf367d95d34",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "remove-tsconfig-option-from-jest-executor"
+      "set-continuous-option"
     ]
   }
 }
