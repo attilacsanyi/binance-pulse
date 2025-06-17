@@ -48,3 +48,14 @@ Thumbs.db
 .netlify
 
 .env
+
+# Cursor
+.cursor/rules/nx-rules.mdc
+
+# Nx
+.github/instructions/nx.instructions.md
+
+# Claude
+# Claude
+.claude
+CLAUDE.md

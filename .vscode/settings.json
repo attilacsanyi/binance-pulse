@@ -26,5 +26,6 @@
     "source.fixAll.stylelint": "always"
   },
   "editor.formatOnSave": true,
-  "editor.foldingImportsByDefault": false
+  "editor.foldingImportsByDefault": false,
+  "nxConsole.generateAiAgentRules": true
 }
