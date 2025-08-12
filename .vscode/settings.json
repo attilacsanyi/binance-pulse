@@ -27,5 +27,29 @@
   },
   "editor.formatOnSave": true,
   "editor.foldingImportsByDefault": false,
-  "nxConsole.generateAiAgentRules": true
+  "nxConsole.generateAiAgentRules": true,
+  "todo-tree.general.tags": ["TODO", "FIXME", "console.log"],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "note",
+      "type": "line",
+      "foreground": "#6EEB83",
+      "iconColour": "#6EEB83",
+      "gutterIcon": true
+    },
+    "FIXME": {
+      "icon": "bug",
+      "type": "line",
+      "foreground": "#FFB347",
+      "iconColour": "#FFB347",
+      "gutterIcon": true
+    },
+    "console.log": {
+      "icon": "pencil",
+      "type": "line",
+      "foreground": "#FFE761",
+      "iconColour": "#FFE761",
+      "gutterIcon": true
+    }
+  }
 }
