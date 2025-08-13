@@ -39,8 +39,8 @@ importers:
         specifier: 20.1.6
         version: 20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@20.1.6(@angular/animations@20.1.6(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@20.1.6(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0)
       '@ngrx/signals':
-        specifier: 19.0.1
-        version: 19.0.1(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
+        specifier: 20.0.0
+        version: 20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
       rxjs:
         specifier: 7.8.0
         version: 7.8.0
@@ -2677,10 +2677,10 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
 
-  '@ngrx/signals@19.0.1':
-    resolution: {integrity: sha512-e9cGgF//tIyN1PKDDcBQkI0csxRcw4r9ezTtDzQpM2gPU5frD9JxaW/YU5gM02ZMl97bUMoI82fBtnDN0RtyWg==}
+  '@ngrx/signals@20.0.0':
+    resolution: {integrity: sha512-ALz9dzu4tkL3QtgtkyHqvO14Od3tY/febpsqS6LaUgIxF8jFtmAneo0VgaGB2O7KamMwrwF005lpZjl/zeZghA==}
     peerDependencies:
-      '@angular/core': ^19.0.0
+      '@angular/core': ^20.0.0
       rxjs: ^6.5.3 || ^7.4.0
     peerDependenciesMeta:
       rxjs:
@@ -13721,7 +13721,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@ngrx/signals@19.0.1(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)':
+  '@ngrx/signals@20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)':
     dependencies:
       '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.0)(zone.js@0.15.0)
       tslib: 2.3.0

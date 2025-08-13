@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BinanceService } from '@bp/core';
+import { patchState } from '@ngrx/signals';
+import { unprotected } from '@ngrx/signals/testing';
 import { of } from 'rxjs';
 import { OrderBookStore } from './order-book.store';
 
@@ -37,6 +39,24 @@ describe('OrderBookStore', () => {
       expect(store.sortedTradingPairs()).toEqual([
         { symbol: 'ADAETH' },
         { symbol: 'BTCETH' },
+      ]);
+    });
+  });
+
+  describe('sortedTradingPairs', () => {
+    it('should sort trading pairs alphabetically', () => {
+      patchState(unprotected(store), {
+        tradingPairs: [
+          { symbol: 'BTCETH' },
+          { symbol: 'ADAETH' },
+          { symbol: 'ETHUSDT' },
+        ],
+      });
+
+      expect(store.sortedTradingPairs()).toEqual([
+        { symbol: 'ADAETH' },
+        { symbol: 'BTCETH' },
+        { symbol: 'ETHUSDT' },
       ]);
     });
   });
