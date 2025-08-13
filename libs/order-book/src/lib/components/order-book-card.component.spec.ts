@@ -1,5 +1,6 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { inputBinding } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCardHarness } from '@angular/material/card/testing';
@@ -22,9 +23,10 @@ describe('OrderBookCardComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OrderBookCardComponent);
-    fixture.componentRef.setInput('symbol', 'BTCUSDT');
-    fixture.detectChanges();
+    fixture = TestBed.createComponent(OrderBookCardComponent, {
+      bindings: [inputBinding('symbol', () => 'BTCUSDT')],
+    });
+
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
