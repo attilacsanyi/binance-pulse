@@ -4,5 +4,22 @@
   "tabWidth": 2,
   "arrowParens": "avoid",
   "singleAttributePerLine": true,
-  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ],
+  "attributeGroups": [
+    "^(#.+)$",
+    "^(id|name)$",
+    "$ANGULAR_STRUCTURAL_DIRECTIVE",
+    "$ANGULAR_TWO_WAY_BINDING",
+    "$ANGULAR_INPUT",
+    "$ANGULAR_OUTPUT",
+    "$DEFAULT",
+    "^class$",
+    "^aria-",
+    "^data-"
+  ],
+  "attributeSort": "ASC"
 }

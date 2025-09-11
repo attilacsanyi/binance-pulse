@@ -71,10 +71,11 @@ export default [
       ],
     },
   },
-  {
-    files: ['**/*.html'],
-    rules: {
-      '@angular-eslint/template/attributes-order': 'error',
-    },
-  },
+  // {
+  //   files: ['**/*.html'],
+  //   rules: {
+  //     // Prefer using prettier for attribute order
+  //     '@angular-eslint/template/attributes-order': 'off',
+  //   },
+  // },
 ];
