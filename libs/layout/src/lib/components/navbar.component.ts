@@ -9,10 +9,10 @@ import { RouterModule } from '@angular/router';
     <nav class="flex gap-4">
       @for (navItem of navItems; track navItem.routerLink; let last = $last) {
         <a
-          routerLinkActive="active hover:animate-none"
-          class="flex items-center gap-2 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:animate-pulse"
           [routerLink]="navItem.routerLink"
           [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active hover:animate-none"
+          class="flex items-center gap-2 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:animate-pulse"
           ><mat-icon>{{ navItem.icon }}</mat-icon
           >{{ navItem.label }}</a
         >

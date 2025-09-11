@@ -20,9 +20,9 @@ interface OrderBookEntryVM {
   template: `
     <h3 class="mb-4 pl-4 text-lg font-bold">{{ title() }}</h3>
     <table
-      class="entry-table"
-      mat-table
       [dataSource]="entries()"
+      mat-table
+      class="entry-table"
     >
       @for (column of columns; track column) {
         <ng-container [matColumnDef]="column.columnDef">

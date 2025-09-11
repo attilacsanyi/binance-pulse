@@ -27,13 +27,13 @@ import { filter } from 'rxjs';
         <mat-label>Trading Pair</mat-label>
         <input
           #tradingPairInput
-          placeholder="Add one"
-          matInput
-          type="text"
           [formControl]="control"
           [matAutocomplete]="auto"
-          (input)="filter()"
           (focus)="filter()"
+          (input)="filter()"
+          matInput
+          placeholder="Add one"
+          type="text"
         />
         <mat-autocomplete
           #auto="matAutocomplete"

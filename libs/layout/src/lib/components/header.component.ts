@@ -11,13 +11,13 @@ import { NavbarComponent } from './navbar.component';
       <div class="mx-auto max-w-7xl px-4 py-4">
         <div class="flex items-center">
           <img
-            routerLink="/"
-            ngSrc="logo.png"
             alt="Binance Pulse Logo"
-            class="mr-4 cursor-pointer"
-            loading="eager"
-            width="32"
             height="32"
+            loading="eager"
+            ngSrc="logo.png"
+            routerLink="/"
+            width="32"
+            class="mr-4 cursor-pointer"
           />
           <h1 class="text-2xl font-bold">{{ title }}</h1>
         </div>

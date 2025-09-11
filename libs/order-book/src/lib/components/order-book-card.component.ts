@@ -25,14 +25,14 @@ import { OrderBookEntryTableComponent } from './order-book-entry-table.component
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
                 <bp-order-book-entry-table
-                  title="Bids"
                   [entries]="orderBookData.bids"
+                  title="Bids"
                 />
               </div>
               <div>
                 <bp-order-book-entry-table
-                  title="Asks"
                   [entries]="orderBookData.asks"
+                  title="Asks"
                 />
               </div>
             </div>
@@ -47,8 +47,8 @@ import { OrderBookEntryTableComponent } from './order-book-entry-table.component
       </mat-card-content>
       <mat-card-actions align="end">
         <button
-          mat-button
           (click)="removeOrderBook()"
+          mat-button
         >
           Remove
         </button>
