@@ -9,6 +9,7 @@ import {
   PreloadAllModules,
   provideRouter,
   withPreloading,
+  withViewTransitions,
 } from '@angular/router';
 import { ENV } from '@bp/core';
 import { environment } from '../environments/environment';
@@ -17,7 +18,11 @@ import { appRoutes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZonelessChangeDetection(),
-    provideRouter(appRoutes, withPreloading(PreloadAllModules)),
+    provideRouter(
+      appRoutes,
+      withPreloading(PreloadAllModules),
+      withViewTransitions(),
+    ),
     provideHttpClient(),
     provideAnimationsAsync(),
     {
