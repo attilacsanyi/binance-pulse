@@ -33,18 +33,30 @@ export const OrderBookStore = signalStore(
   })),
   withMethods(store => ({
     addOrderBookSymbol(symbol: string): void {
-      patchState(store, state => ({
-        orderBookSymbols: [...state.orderBookSymbols, symbol],
-        tradingPairs: state.tradingPairs?.filter(
-          pair => pair.symbol !== symbol,
-        ),
-      }));
+      patchState(store, state => {
+        const alreadyAdded = state.orderBookSymbols.includes(symbol);
+        return alreadyAdded
+          ? state
+          : {
+              orderBookSymbols: [...state.orderBookSymbols, symbol],
+              tradingPairs: state.tradingPairs?.filter(
+                pair => pair.symbol !== symbol,
+              ),
+            };
+      });
     },
     removeOrderBookSymbol(symbol: string): void {
-      patchState(store, state => ({
-        orderBookSymbols: state.orderBookSymbols.filter(s => s !== symbol),
-        tradingPairs: [...(state.tradingPairs || []), { symbol }],
-      }));
+      patchState(store, state => {
+        const wasPresent = state.orderBookSymbols.includes(symbol);
+        return wasPresent
+          ? {
+              orderBookSymbols: state.orderBookSymbols.filter(
+                s => s !== symbol,
+              ),
+              tradingPairs: [...(state.tradingPairs || []), { symbol }],
+            }
+          : state;
+      });
     },
   })),
   withHooks(store => {
