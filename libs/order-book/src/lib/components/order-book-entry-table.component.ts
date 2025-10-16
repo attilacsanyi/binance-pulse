@@ -7,10 +7,7 @@ import {
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 
-interface OrderBookEntryVM {
-  price: string;
-  quantity: string;
-}
+import { OrderBookEntry as OrderBookEntryVM } from '../models';
 
 /**
  * @docs: https://material.angular.io/components/table/examples#table-column-styling

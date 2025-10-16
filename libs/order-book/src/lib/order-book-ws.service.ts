@@ -4,21 +4,7 @@ import { ENV } from '@bp/core';
 import { of, timer } from 'rxjs';
 import { catchError, retry, throttleTime } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket';
-
-interface OrderBookEntry {
-  price: string;
-  quantity: string;
-}
-
-/**
- * TODO: need to export this interface
- * Issue in order-book-card.component.ts:
- *   Public property 'orderBookData' of exported class has or is using name 'OrderBookData' from external module "...order-book-ws.service" but cannot be named.
- */
-export interface OrderBookData {
-  bids: OrderBookEntry[];
-  asks: OrderBookEntry[];
-}
+import { OrderBookData, OrderBookEntry } from './models';
 
 interface OrderBookMessage {
   lastUpdateId: number;
