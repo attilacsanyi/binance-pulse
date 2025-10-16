@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {
   PreloadAllModules,
   provideRouter,
+  withInMemoryScrolling,
   withPreloading,
   withViewTransitions,
 } from '@angular/router';
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       appRoutes,
       withPreloading(PreloadAllModules),
       withViewTransitions(),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
     ),
     provideHttpClient(),
     provideAnimationsAsync(),
