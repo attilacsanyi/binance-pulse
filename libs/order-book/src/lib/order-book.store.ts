@@ -24,7 +24,7 @@ export const OrderBookStore = signalStore(
   withState<OrderBookStore>({ orderBookSymbols: [], tradingPairs: undefined }),
   // Common dependencies
   withProps(() => ({
-    binanceService: inject(BinanceService),
+    _binanceService: inject(BinanceService),
   })),
   withComputed(store => ({
     sortedTradingPairs: computed(() =>
@@ -60,12 +60,12 @@ export const OrderBookStore = signalStore(
     },
   })),
   withHooks(store => {
-    const { binanceService } = store;
+    const { _binanceService } = store;
 
     return {
       onInit() {
         console.debug('Order book store initialized', store.orderBookSymbols());
-        binanceService
+        _binanceService
           .getTradingPairs()
           .pipe(takeUntilDestroyed())
           .subscribe(pairs => {
