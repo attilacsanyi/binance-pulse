@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
     <nav class="flex gap-4">
       @for (navItem of navItems; track navItem.routerLink; let last = $last) {
         <a
+          [attr.aria-label]="navItem.label"
           [routerLink]="navItem.routerLink"
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="active hover:animate-none"

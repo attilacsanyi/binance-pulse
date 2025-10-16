@@ -49,6 +49,7 @@ import { OrderBookEntryTableComponent } from './order-book-entry-table.component
         <button
           (click)="removeOrderBook()"
           mat-button
+          aria-label="Remove order book"
         >
           Remove
         </button>
