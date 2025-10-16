@@ -7,6 +7,7 @@ import {
   withComputed,
   withHooks,
   withMethods,
+  withProps,
   withState,
 } from '@ngrx/signals';
 
@@ -21,6 +22,10 @@ interface OrderBookStore {
 
 export const OrderBookStore = signalStore(
   withState<OrderBookStore>({ orderBookSymbols: [], tradingPairs: undefined }),
+  // Common dependencies
+  withProps(() => ({
+    binanceService: inject(BinanceService),
+  })),
   withComputed(store => ({
     sortedTradingPairs: computed(() =>
       store.tradingPairs()?.sort((a, b) => a.symbol.localeCompare(b.symbol)),
@@ -43,7 +48,7 @@ export const OrderBookStore = signalStore(
     },
   })),
   withHooks(store => {
-    const binanceService = inject(BinanceService);
+    const { binanceService } = store;
 
     return {
       onInit() {
