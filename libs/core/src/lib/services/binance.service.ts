@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { ENV } from '../env';
 
 interface BinanceSymbol {
@@ -37,7 +37,7 @@ export class BinanceService {
         ),
         catchError(error => {
           console.error('Error fetching trading pairs:', error);
-          return [];
+          return of([]);
         }),
       );
   }
