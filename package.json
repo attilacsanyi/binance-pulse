@@ -13,7 +13,11 @@
     "deploy": "nx run deploy-prod",
     "ci": "pnpm test && pnpm lint",
     "graph": "nx graph",
-    "format": "nx format:write --all"
+    "format": "nx format:write --all",
+    "// HOOKS": "",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
+    "lint-staged": "NODE_OPTIONS='--experimental-strip-types' pnpm exec lint-staged --verbose -c lint-staged.config.ts"
   },
   "private": true,
   "dependencies": {
@@ -57,10 +61,12 @@
     "eslint": "9.28.0",
     "eslint-config-prettier": "10.1.1",
     "http-server": "14.1.1",
+    "husky": "9.1.7",
     "jest": "30.0.5",
     "jest-environment-jsdom": "30.0.5",
     "jest-preset-angular": "15.0.0",
     "jest-util": "30.0.5",
+    "lint-staged": "16.2.6",
     "netlify-cli": "18.1.0",
     "nx": "22.0.2",
     "postcss": "8.4.5",

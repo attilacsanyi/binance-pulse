@@ -1,0 +1,8 @@
+pnpm lint-staged
+
+if [ $? -ne 0 ]; then
+  echo "WARNING: failed to run lint-staged (pnpm exec lint-staged)"
+  exit 1;
+fi
+
+exit 0;
