@@ -10,7 +10,7 @@ import { ENV } from '../env';
 interface TickerMessage {
   /** Event type: "24hrTicker" */
   e: string;
-  /** Symbol (e.g., "BNBETH") */
+  /** Symbol (e.g., "BNBUSDC") */
   s: string;
 }
 
@@ -21,7 +21,7 @@ export class BinanceService {
   /**
    * Get trading pairs via WebSocket using the All Market Tickers stream.
    * Uses data-stream.binance.vision endpoint for market data only.
-   * Filters symbols by quote asset suffix (e.g., symbols ending with 'ETH').
+   * Filters symbols by quote asset suffix (e.g., symbols ending with 'USDC').
    * @param quoteAssetParam Quote asset to filter by (default: 'USDC')
    */
   getTradingPairs(quoteAssetParam = 'USDC'): Observable<string[]> {
