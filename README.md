@@ -4,60 +4,52 @@
 
 Real-time order book visualization for Binance trading pairs.
 
-## Features `Order Book`
+## Features
 
-- Real-time order book data via WebSocket connection
-- Multiple order book views simultaneously
-- Trading pair selection with autocomplete
-- ETH quote asset pairs supported by default
+- Real-time order book data via WebSocket
+- Multiple order books simultaneously
+- Trading pair autocomplete (ETH pairs by default)
 - Responsive grid layout
 
 ## Getting Started
 
-- Install dependencies: `pnpm install`
-- Start the development server: `pnpm start`
-- Build for production: `pnpm build`
-- Local production demo: `pnpm demo` (using `http-server`)
-- Test: `pnpm test`
-- Lint: `pnpm lint`
-- Dependency graph: `pnpm graph`
-
-## Developer Notes
-
-### Modules
-
-1. `core`
-2. `layout`
-3. `order-book`
-
-### WebSocket Connection
-
-The application connects to Binance's WebSocket API using the following format:
-
-```typescript
-wss://stream.binance.com:9443/ws/adaeth@depth5@100ms
+```bash
+pnpm install    # Install dependencies
+pnpm start      # Development server
+pnpm build      # Production build
+pnpm test       # Run tests
+pnpm lint       # Run linter
+pnpm demo       # Local production preview
+pnpm graph      # View dependency graph
 ```
 
-### Binance API
+## Architecture
 
-The application uses the Binance API to get the list of trading pairs.
+### Libraries
 
-```typescript
-https://api.binance.com/api/v3/exchangeInfo
-```
+| Library      | Purpose                                               |
+| ------------ | ----------------------------------------------------- |
+| `core`       | Environment config, BinanceService                    |
+| `layout`     | Header, navbar components                             |
+| `order-book` | Order book page, components, store, WebSocket service |
+
+### Binance WebSocket API
+
+Uses `wss://data-stream.binance.vision/ws` for all market data:
+
+- **Trading pairs**: `!ticker@arr` stream
+- **Order book**: `{symbol}@depth5@100ms` stream
+
+No API keys required - public market data only.
 
 ### State Management
 
-The application uses NgRx Signals for state management with:
-
-- Computed signals for derived state
-- Signal stores for complex state management
-- Component-level signals for local state
+NgRx Signal Store with computed signals for derived state.
 
 ## Deployment
 
-The application is configured for Netlify deployment using the `deploy` script and Github Actions (`ci.yml`).
+Netlify deployment via GitHub Actions (`ci.yml`).
 
 ---
 
-Built with [Nx](https://nx.dev) 🔥
+Built with [Nx](https://nx.dev)
