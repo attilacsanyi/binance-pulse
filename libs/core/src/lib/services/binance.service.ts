@@ -1,44 +1,48 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, first, map, Observable, of } from 'rxjs';
+import { webSocket } from 'rxjs/webSocket';
 import { ENV } from '../env';
 
-interface BinanceSymbol {
-  symbol: string;
-  isSpotTradingAllowed: boolean;
-  quoteAsset: string;
+/**
+ * 24hr rolling window ticker from !ticker@arr stream
+ * https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams
+ */
+interface TickerMessage {
+  /** Event type: "24hrTicker" */
+  e: string;
+  /** Symbol (e.g., "BNBETH") */
+  s: string;
 }
 
-interface ExchangeInfoResponse {
-  symbols: BinanceSymbol[];
-}
-
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class BinanceService {
-  readonly #http = inject(HttpClient);
   readonly #env = inject(ENV);
 
+  /**
+   * Get trading pairs via WebSocket using the All Market Tickers stream.
+   * Uses data-stream.binance.vision endpoint for market data only.
+   * Filters symbols by quote asset suffix (e.g., symbols ending with 'ETH').
+   * @param quoteAssetParam Quote asset to filter by (default: 'ETH')
+   */
   getTradingPairs(quoteAssetParam = 'ETH'): Observable<string[]> {
-    return this.#http
-      .get<ExchangeInfoResponse>(
-        `${this.#env.binanceApiUrl}/exchangeInfo?symbolStatus=TRADING`,
-      )
-      .pipe(
-        map(response =>
-          response.symbols
-            .filter(
-              symbol =>
-                symbol.isSpotTradingAllowed &&
-                symbol.quoteAsset === quoteAssetParam,
-            )
-            .map(({ symbol }) => symbol),
-        ),
-        catchError(error => {
-          console.error('Error fetching trading pairs:', error);
-          return of([]);
-        }),
-      );
+    const wsUrl = `${this.#env.binanceDataWsUrl}/!ticker@arr`;
+
+    return webSocket<TickerMessage[]>({
+      url: wsUrl,
+      openObserver: {
+        next: () => console.debug('Connected to ticker stream'),
+      },
+    }).pipe(
+      first(),
+      map(tickers =>
+        tickers
+          .filter(ticker => ticker.s.endsWith(quoteAssetParam))
+          .map(ticker => ticker.s),
+      ),
+      catchError(error => {
+        console.error('Error fetching trading pairs via WebSocket:', error);
+        return of([]);
+      }),
+    );
   }
 }

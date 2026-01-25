@@ -1,4 +1,3 @@
-import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
   provideZonelessChangeDetection,
@@ -24,7 +23,6 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
     ),
-    provideHttpClient(),
     {
       provide: ENV,
       useValue: environment,

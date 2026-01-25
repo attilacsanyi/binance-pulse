@@ -29,11 +29,12 @@ export class OrderBookWSService {
 
   /**
    * Connect to the order book WebSocket server for a given symbol.
+   * Uses data-stream.binance.vision endpoint for market data.
    * @param symbol The symbol to connect to.
    * @param throttleTimeMs The time to throttle the messages.
    */
   connect(symbol: string, throttleTimeMs = 2000): void {
-    const wsUrl = `${this.#env.binanceWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
+    const wsUrl = `${this.#env.binanceDataWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
     /** https://rxjs.dev/api/webSocket/webSocket#websocket */
     const websocket$ = webSocket<OrderBookMessage | null>({
       url: wsUrl,

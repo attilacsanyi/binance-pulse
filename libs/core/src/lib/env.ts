@@ -1,13 +1,13 @@
 type Env = {
   production: boolean;
   binanceApiUrl: string;
-  binanceWsUrl: string;
+  binanceDataWsUrl: string;
 };
 
 export const commonEnv: Env = {
   production: true,
   binanceApiUrl: 'https://api.binance.com/api/v3',
-  binanceWsUrl: 'wss://stream.binance.com:9443/ws',
+  binanceDataWsUrl: 'wss://data-stream.binance.vision/ws',
 };
 
 import { InjectionToken } from '@angular/core';
