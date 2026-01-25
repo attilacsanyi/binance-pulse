@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { catchError, first, map, Observable, of } from 'rxjs';
+import { catchError, finalize, first, map, Observable, of } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import { ENV } from '../env';
 
@@ -22,17 +22,22 @@ export class BinanceService {
    * Get trading pairs via WebSocket using the All Market Tickers stream.
    * Uses data-stream.binance.vision endpoint for market data only.
    * Filters symbols by quote asset suffix (e.g., symbols ending with 'ETH').
-   * @param quoteAssetParam Quote asset to filter by (default: 'ETH')
+   * @param quoteAssetParam Quote asset to filter by (default: 'USDC')
    */
-  getTradingPairs(quoteAssetParam = 'ETH'): Observable<string[]> {
+  getTradingPairs(quoteAssetParam = 'USDC'): Observable<string[]> {
     const wsUrl = `${this.#env.binanceDataWsUrl}/!ticker@arr`;
 
-    return webSocket<TickerMessage[]>({
+    const ws$ = webSocket<TickerMessage[]>({
       url: wsUrl,
       openObserver: {
         next: () => console.debug('Connected to ticker stream'),
       },
-    }).pipe(
+      closeObserver: {
+        next: () => console.debug('Disconnected from ticker stream'),
+      },
+    });
+
+    return ws$.pipe(
       first(),
       map(tickers =>
         tickers
@@ -43,6 +48,7 @@ export class BinanceService {
         console.error('Error fetching trading pairs via WebSocket:', error);
         return of([]);
       }),
+      finalize(() => ws$.complete()),
     );
   }
 }

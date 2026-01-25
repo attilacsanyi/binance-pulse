@@ -1,9 +1,8 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ENV } from '@bp/core';
-import { of, timer } from 'rxjs';
+import { of, Subscription, timer } from 'rxjs';
 import { catchError, retry, throttleTime } from 'rxjs/operators';
-import { webSocket } from 'rxjs/webSocket';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { OrderBookData, OrderBookEntry } from './models';
 
 interface OrderBookMessage {
@@ -25,7 +24,14 @@ export class OrderBookWSService {
   readonly #destroyRef = inject(DestroyRef);
   readonly #orderBookData = signal<OrderBookData | undefined | null>(undefined);
 
+  #ws$: WebSocketSubject<OrderBookMessage | null> | null = null;
+  #subscription: Subscription | null = null;
+
   readonly orderBookData = this.#orderBookData.asReadonly();
+
+  constructor() {
+    this.#destroyRef.onDestroy(() => this.#disconnect());
+  }
 
   /**
    * Connect to the order book WebSocket server for a given symbol.
@@ -35,8 +41,8 @@ export class OrderBookWSService {
    */
   connect(symbol: string, throttleTimeMs = 2000): void {
     const wsUrl = `${this.#env.binanceDataWsUrl}/${symbol.toLowerCase()}@depth5@100ms`;
-    /** https://rxjs.dev/api/webSocket/webSocket#websocket */
-    const websocket$ = webSocket<OrderBookMessage | null>({
+
+    this.#ws$ = webSocket<OrderBookMessage | null>({
       url: wsUrl,
       openObserver: {
         next: () => console.debug(`Connected to ${symbol} WebSocket server`),
@@ -47,15 +53,8 @@ export class OrderBookWSService {
       },
     });
 
-    websocket$
+    this.#subscription = this.#ws$
       .pipe(
-        takeUntilDestroyed(this.#destroyRef),
-        // Force error on first message to test retry logic
-        // tap({
-        //   next: () => {
-        //     throw new Error('Forced error on first message');
-        //   },
-        // }),
         retry({
           count: 2,
           delay: (error, retryAttempt) => {
@@ -93,5 +92,16 @@ export class OrderBookWSService {
     }));
 
     this.#orderBookData.set({ bids, asks });
+  }
+
+  /**
+   * Disconnect from the WebSocket server and clean up resources.
+   */
+  #disconnect(): void {
+    this.#subscription?.unsubscribe();
+    this.#subscription = null;
+
+    this.#ws$?.complete();
+    this.#ws$ = null;
   }
 }
