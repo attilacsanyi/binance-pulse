@@ -5,12 +5,12 @@ Shared utilities and services for the Binance Pulse application.
 ## Contents
 
 - **`ENV`** - Environment configuration injection token
-- **`BinanceService`** - Fetches trading pairs via WebSocket (`!ticker@arr` stream)
+- **`BinanceService`** - Fetches trading pairs via REST API (`/exchangeInfo`)
 
 ## Environment Config
 
 ```typescript
-binanceApiUrl: 'https://api.binance.com/api/v3';
+binanceDataApiUrl: 'https://data-api.binance.vision/api/v3';
 binanceDataWsUrl: 'wss://data-stream.binance.vision/ws';
 ```
 

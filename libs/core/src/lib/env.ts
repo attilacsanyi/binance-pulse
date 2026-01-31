@@ -1,12 +1,12 @@
 type Env = {
   production: boolean;
-  binanceApiUrl: string;
+  binanceDataApiUrl: string;
   binanceDataWsUrl: string;
 };
 
 export const commonEnv: Env = {
   production: true,
-  binanceApiUrl: 'https://api.binance.com/api/v3',
+  binanceDataApiUrl: 'https://data-api.binance.vision/api/v3',
   binanceDataWsUrl: 'wss://data-stream.binance.vision/ws',
 };
 

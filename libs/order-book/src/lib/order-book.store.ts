@@ -1,4 +1,4 @@
-import { computed, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BinanceService } from '@bp/core';
 import {
@@ -17,20 +17,25 @@ export interface TradingPair {
 
 interface OrderBookStore {
   orderBookSymbols: string[];
-  tradingPairs: TradingPair[] | undefined;
+  tradingPairs: TradingPair[] | null;
 }
 
 export const OrderBookStore = signalStore(
-  withState<OrderBookStore>({ orderBookSymbols: [], tradingPairs: undefined }),
+  withState<OrderBookStore>({
+    orderBookSymbols: [],
+    tradingPairs: null,
+  }),
   // Common dependencies
   withProps(() => ({
     _binanceService: inject(BinanceService),
   })),
   withComputed(store => ({
     tradingPairsLoading: () => store.tradingPairs() === null,
-    sortedTradingPairs: computed(() =>
-      store.tradingPairs()?.sort((a, b) => a.symbol.localeCompare(b.symbol)),
-    ),
+    sortedTradingPairs: () => {
+      const tradingPairs = store.tradingPairs();
+      if (tradingPairs === null) return null;
+      return tradingPairs.sort((a, b) => a.symbol.localeCompare(b.symbol));
+    },
   })),
   withMethods(store => ({
     addOrderBookSymbol(symbol: string): void {
@@ -40,9 +45,10 @@ export const OrderBookStore = signalStore(
           ? state
           : {
               orderBookSymbols: [...state.orderBookSymbols, symbol],
-              tradingPairs: state.tradingPairs?.filter(
-                pair => pair.symbol !== symbol,
-              ),
+              tradingPairs:
+                state.tradingPairs === null
+                  ? null
+                  : state.tradingPairs.filter(pair => pair.symbol !== symbol),
             };
       });
     },
@@ -66,13 +72,23 @@ export const OrderBookStore = signalStore(
     return {
       onInit() {
         console.debug('Order book store initialized', store.orderBookSymbols());
+
         _binanceService
           .getTradingPairs()
           .pipe(takeUntilDestroyed())
-          .subscribe(pairs => {
-            patchState(store, _state => ({
-              tradingPairs: pairs.map(pair => ({ symbol: pair })),
-            }));
+          .subscribe({
+            next: pairs => {
+              patchState(store, {
+                tradingPairs: pairs.map(pair => ({ symbol: pair })),
+              });
+              console.debug(
+                'Order book store trading pairs loaded',
+                pairs.length,
+              );
+            },
+            error: () => {
+              patchState(store, { tradingPairs: null });
+            },
           });
       },
       onDestroy() {

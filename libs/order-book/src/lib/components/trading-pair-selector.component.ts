@@ -74,11 +74,10 @@ import { filter } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingPairSelectorComponent {
+  readonly tradingPairs = input.required<{ symbol: string }[] | null>();
   readonly loading = input(false, { transform: booleanAttribute });
   // REQ: use signal forms here
-  readonly control = new FormControl<string | null>(null, {
-    nonNullable: true,
-  });
+  readonly control = new FormControl<string>('', { nonNullable: true });
 
   // eslint-disable-next-line no-unused-private-class-members
   readonly #loadingEffect = effect(() => {
@@ -95,7 +94,7 @@ export class TradingPairSelectorComponent {
   readonly pairSelected = outputFromObservable(
     this.control.valueChanges.pipe(
       takeUntilDestroyed(),
-      filter((value): value is string => value !== null),
+      filter((value): value is string => value.length > 0),
     ),
   );
 

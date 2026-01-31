@@ -8,7 +8,7 @@ Real-time order book visualization for Binance trading pairs.
 
 - Real-time order book data via WebSocket
 - Multiple order books simultaneously
-- Trading pair autocomplete (ETH pairs by default)
+- Trading pair autocomplete (USDC pairs by default)
 - Responsive grid layout
 
 ## Getting Started
@@ -33,12 +33,12 @@ pnpm graph      # View dependency graph
 | `layout`     | Header, navbar components                             |
 | `order-book` | Order book page, components, store, WebSocket service |
 
-### Binance WebSocket API
+### Binance API
 
-Uses `wss://data-stream.binance.vision/ws` for all market data:
+Uses `data-api.binance.vision` and `data-stream.binance.vision` for market data:
 
-- **Trading pairs**: `!ticker@arr` stream
-- **Order book**: `{symbol}@depth5@100ms` stream
+- **Trading pairs**: REST API `/exchangeInfo` (filtered by quote asset, default: USDC)
+- **Order book**: WebSocket `{symbol}@depth5@100ms` stream
 
 No API keys required - public market data only.
 
