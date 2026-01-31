@@ -1,3 +1,29 @@
+## 0.2.1 (2026-01-31)
+
+### 🚀 Features
+
+- **accessibility:** improved accessibility ([cf8e2a3](https://github.com/attilacsanyi/binance-pulse/commit/cf8e2a3))
+- **app.config:** add withViewTransitions to router configuration for enhanced navigation experience ([1238ea3](https://github.com/attilacsanyi/binance-pulse/commit/1238ea3))
+- **app.config:** enable in-memory scrolling in router configuration for improved user experience ([3fd2bfd](https://github.com/attilacsanyi/binance-pulse/commit/3fd2bfd))
+- **home-page:** implement OnPush change detection strategy for improved performance ([0936b8c](https://github.com/attilacsanyi/binance-pulse/commit/0936b8c))
+- **lint-staged:** add lint-staged configuration and pre-commit hook for automated linting and formatting ([9371b73](https://github.com/attilacsanyi/binance-pulse/commit/9371b73))
+- **order-book:** make \_binanceService private to store ([fde2729](https://github.com/attilacsanyi/binance-pulse/commit/fde2729))
+- **order-book:** add loading state for trading pairs ([0356f36](https://github.com/attilacsanyi/binance-pulse/commit/0356f36))
+- **order-book.store:** integrate binanceService as a prop for improved dependency management ([b32bae5](https://github.com/attilacsanyi/binance-pulse/commit/b32bae5))
+- **profiling:** enable application profiling before bootstrapping to capture startup performance ([817f3cc](https://github.com/attilacsanyi/binance-pulse/commit/817f3cc))
+- **zoneless:** remove zone.js dependency and update test setup for zoneless environment ([2e3fd5b](https://github.com/attilacsanyi/binance-pulse/commit/2e3fd5b))
+
+### 🩹 Fixes
+
+- **binance:** update ticker symbol example and adjust trading pairs filter description to reflect USDC ([ff70089](https://github.com/attilacsanyi/binance-pulse/commit/ff70089))
+- **binance.service:** handle errors in fetching trading pairs by returning an observable of an empty array ([67f16a2](https://github.com/attilacsanyi/binance-pulse/commit/67f16a2))
+- **layout:** adjust header and navbar component styles ([ef4d42f](https://github.com/attilacsanyi/binance-pulse/commit/ef4d42f))
+- **order-book:** prevent duplicate order book symbols and ensure state consistency ([6cd5edc](https://github.com/attilacsanyi/binance-pulse/commit/6cd5edc))
+
+### ❤️ Thank You
+
+- Attila Csanyi @attilacsanyi
+
 ## 0.2.0 (2025-03-11)
 
 ### 🚀 Features
