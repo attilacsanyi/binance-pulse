@@ -2,25 +2,21 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  effect,
-  ElementRef,
+  computed,
   input,
-  linkedSignal,
-  viewChild,
+  output,
+  signal,
 } from '@angular/core';
-import {
-  outputFromObservable,
-  takeUntilDestroyed,
-} from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { disabled, form, FormField } from '@angular/forms/signals';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { filter } from 'rxjs';
 
 /**
- * @docs: https://material.angular.io/components/autocomplete/examples#autocomplete-require-selection
+ * Trading pair selector using Signal Forms (Angular experimental API).
+ * @docs https://angular.dev/essentials/signal-forms
+ * @docs https://material.angular.io/components/autocomplete/examples#autocomplete-require-selection
  */
 @Component({
   selector: 'bp-trading-pair-selector',
@@ -29,11 +25,9 @@ import { filter } from 'rxjs';
       <mat-form-field>
         <mat-label>Trading Pair</mat-label>
         <input
-          #tradingPairInput
-          [formControl]="control"
+          [formField]="tradingPairForm.tradingPair"
           [matAutocomplete]="auto"
-          (focus)="filter()"
-          (input)="filter()"
+          (input)="onInputChange($event)"
           matInput
           placeholder="Add one"
           type="text"
@@ -46,6 +40,7 @@ import { filter } from 'rxjs';
         }
         <mat-autocomplete
           #auto="matAutocomplete"
+          (optionSelected)="onOptionSelected($event.option.value)"
           requireSelection
         >
           @for (pair of filteredTradingPairs(); track pair.symbol) {
@@ -69,44 +64,40 @@ import { filter } from 'rxjs';
     MatInputModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule,
+    FormField,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingPairSelectorComponent {
   readonly tradingPairs = input.required<{ symbol: string }[] | null>();
   readonly loading = input(false, { transform: booleanAttribute });
-  // REQ: use signal forms here
-  readonly control = new FormControl<string>('', { nonNullable: true });
+  readonly pairSelected = output<string>();
 
-  // eslint-disable-next-line no-unused-private-class-members
-  readonly #loadingEffect = effect(() => {
-    if (this.loading()) {
-      this.control.disable();
-    } else {
-      this.control.enable();
-    }
+  readonly #model = signal({ tradingPair: '' });
+  readonly #filterValue = signal('');
+
+  readonly tradingPairForm = form(this.#model, schemaPath => {
+    disabled(schemaPath.tradingPair, () => this.loading());
   });
 
-  readonly tradingPairInput =
-    viewChild.required<ElementRef<HTMLInputElement>>('tradingPairInput');
-
-  readonly pairSelected = outputFromObservable(
-    this.control.valueChanges.pipe(
-      takeUntilDestroyed(),
-      filter((value): value is string => value.length > 0),
-    ),
-  );
-
-  readonly filteredTradingPairs = linkedSignal(() => this.tradingPairs() ?? []);
-
-  filter(): void {
-    const filterValue =
-      this.tradingPairInput().nativeElement.value.toLowerCase();
-    this.filteredTradingPairs.set(
-      this.tradingPairs()?.filter(o =>
-        o.symbol.toLowerCase().includes(filterValue),
-      ) ?? [],
+  /** Filters trading pairs based on the current input value. */
+  readonly filteredTradingPairs = computed(() => {
+    const pairs = this.tradingPairs() ?? [];
+    const filterValue = this.#filterValue().toLowerCase();
+    if (!filterValue) {
+      return pairs;
+    }
+    return pairs.filter(pair =>
+      pair.symbol.toLowerCase().includes(filterValue),
     );
+  });
+
+  onInputChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.#filterValue.set(target.value);
+  }
+
+  onOptionSelected(symbol: string): void {
+    this.pairSelected.emit(symbol);
   }
 }
