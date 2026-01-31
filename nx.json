@@ -122,7 +122,7 @@
     },
     "projectsRelationship": "fixed",
     "groups": {
-      "default": {
+      "release": {
         "projects": ["binance-pulse"]
       }
     }
