@@ -1,6 +1,8 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
   input,
   linkedSignal,
@@ -14,6 +16,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { filter } from 'rxjs';
 
 /**
@@ -35,6 +38,12 @@ import { filter } from 'rxjs';
           placeholder="Add one"
           type="text"
         />
+        @if (loading()) {
+          <mat-spinner
+            diameter="20"
+            matSuffix
+          />
+        }
         <mat-autocomplete
           #auto="matAutocomplete"
           requireSelection
@@ -50,18 +59,35 @@ import { filter } from 'rxjs';
     :host {
       display: contents;
     }
+
+    mat-spinner[matSuffix] {
+      margin-right: 8px;
+    }
   `,
   imports: [
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TradingPairSelectorComponent {
-  readonly tradingPairs = input.required<{ symbol: string }[] | undefined>();
-  readonly control = new FormControl('');
+  readonly loading = input(false, { transform: booleanAttribute });
+  // REQ: use signal forms here
+  readonly control = new FormControl<string | null>(null, {
+    nonNullable: true,
+  });
+
+  // eslint-disable-next-line no-unused-private-class-members
+  readonly #loadingEffect = effect(() => {
+    if (this.loading()) {
+      this.control.disable();
+    } else {
+      this.control.enable();
+    }
+  });
 
   readonly tradingPairInput =
     viewChild.required<ElementRef<HTMLInputElement>>('tradingPairInput');
@@ -69,7 +95,7 @@ export class TradingPairSelectorComponent {
   readonly pairSelected = outputFromObservable(
     this.control.valueChanges.pipe(
       takeUntilDestroyed(),
-      filter(value => value !== null),
+      filter((value): value is string => value !== null),
     ),
   );
 

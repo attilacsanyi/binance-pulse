@@ -27,6 +27,7 @@ export const OrderBookStore = signalStore(
     _binanceService: inject(BinanceService),
   })),
   withComputed(store => ({
+    tradingPairsLoading: () => store.tradingPairs() === null,
     sortedTradingPairs: computed(() =>
       store.tradingPairs()?.sort((a, b) => a.symbol.localeCompare(b.symbol)),
     ),
