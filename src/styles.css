@@ -1,8 +1,9 @@
-/* Tailwind */
+/* Tailwind CSS v4 */
+@import 'tailwindcss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Source paths for content detection */
+@source '../**/*.{ts,html}';
+@source '../libs/**/*.{ts,html}';
 
 /* Material */
 

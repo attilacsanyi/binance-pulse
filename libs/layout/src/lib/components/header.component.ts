@@ -7,7 +7,7 @@ import { NavbarComponent } from './navbar.component';
 @Component({
   selector: 'bp-header',
   template: `
-    <header class="shadow-sm">
+    <header class="shadow-xs">
       <div class="mx-auto max-w-7xl px-4 py-4">
         <div class="flex items-center">
           <img

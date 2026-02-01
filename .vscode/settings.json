@@ -26,5 +26,8 @@
     "source.fixAll.stylelint": "always"
   },
   "editor.formatOnSave": true,
-  "editor.foldingImportsByDefault": false
+  "editor.foldingImportsByDefault": false,
+  // CSS
+  // Tailwind CSS v4 uses custom at-rules (@source, @theme, @utility, etc.)
+  "css.lint.unknownAtRules": "ignore"
 }
