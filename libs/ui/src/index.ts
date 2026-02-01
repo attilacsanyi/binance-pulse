@@ -25,3 +25,7 @@ export {
 // Icon (also used for spinners with animate="spin")
 export { IconComponent } from './lib/icon/icon.component';
 export { iconVariants, type IconVariants } from './lib/icon/icon.variants';
+
+// Autocomplete
+export { AutocompleteComponent } from './lib/autocomplete/autocomplete.component';
+export { autocompleteVariants } from './lib/autocomplete/autocomplete.variants';
