@@ -48,12 +48,11 @@ import { OrderBookEntry as OrderBookEntryVM } from '../models';
       ></tr>
     </table>
   `,
+  host: {
+    style: 'display: contents',
+  },
   styles: `
     @use '@angular/material' as mat;
-
-    :host {
-      display: contents;
-    }
 
     .entry-table {
       // https://material.angular.io/components/table/styling

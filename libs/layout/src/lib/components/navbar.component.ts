@@ -23,11 +23,10 @@ import { RouterModule } from '@angular/router';
       }
     </nav>
   `,
+  host: {
+    style: 'display: contents',
+  },
   styles: `
-    :host {
-      display: contents;
-    }
-
     .active {
       color: var(--mat-sys-on-primary-container);
     }

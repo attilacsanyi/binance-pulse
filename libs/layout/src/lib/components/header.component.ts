@@ -28,11 +28,9 @@ import { NavbarComponent } from './navbar.component';
       </div>
     </header>
   `,
-  styles: `
-    :host {
-      display: contents;
-    }
-  `,
+  host: {
+    style: 'display: contents',
+  },
   imports: [RouterModule, NgOptimizedImage, MatDividerModule, NavbarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

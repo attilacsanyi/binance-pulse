@@ -50,11 +50,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       </mat-form-field>
     </form>
   `,
+  host: {
+    style: 'display: contents',
+  },
   styles: `
-    :host {
-      display: contents;
-    }
-
     mat-spinner[matSuffix] {
       margin-right: 8px;
     }
