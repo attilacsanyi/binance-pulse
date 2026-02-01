@@ -21,3 +21,7 @@ export {
   dividerVariants,
   type DividerVariants,
 } from './lib/divider/divider.variants';
+
+// Icon (also used for spinners with animate="spin")
+export { IconComponent } from './lib/icon/icon.component';
+export { iconVariants, type IconVariants } from './lib/icon/icon.variants';
