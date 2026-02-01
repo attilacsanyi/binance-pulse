@@ -14,3 +14,10 @@ export {
   CardTitleComponent,
 } from './lib/card/card.component';
 export { cardVariants, type CardVariants } from './lib/card/card.variants';
+
+// Divider
+export { DividerComponent } from './lib/divider/divider.component';
+export {
+  dividerVariants,
+  type DividerVariants,
+} from './lib/divider/divider.variants';
