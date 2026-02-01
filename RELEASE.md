@@ -2,6 +2,8 @@
 
 This project uses [Nx Release](https://nx.dev/docs/guides/nx-release) for versioning, changelog, and GitHub releases. Git tags follow the format **`release-v{version}`** (e.g. `release-v0.2.0`).
 
+This app is **private** (not published to npm). We use **`--skip-publish`** so Nx only runs versioning, changelog, tagging, and GitHub release—and does not try to publish to a registry (which would fail without an `nx-release-publish` target).
+
 ---
 
 ## Creating a new release (usual flow)
@@ -14,7 +16,7 @@ Use this when you already have at least one tag like `release-v0.2.0` and want t
 2. **Dry run**
 
    ```bash
-   pnpm exec nx release -d
+   pnpm exec nx release --skip-publish -d
    ```
 
    Check the proposed version and changelog.
@@ -22,7 +24,7 @@ Use this when you already have at least one tag like `release-v0.2.0` and want t
 3. **Run release**
 
    ```bash
-   pnpm exec nx release
+   pnpm exec nx release --skip-publish
    ```
 
    Nx will:
@@ -91,15 +93,15 @@ Use this only when you need to introduce or fix a `release-v*` tag at a specific
    ```
 
 4. **From here on**  
-   Use the [usual flow](#creating-a-new-release-usual-flow): run `pnpm exec nx release -d` then `pnpm exec nx release` when you want the next version. Nx will see `release-vX.Y.Z` and compute the next version from it.
+   Use the [usual flow](#creating-a-new-release-usual-flow): run `pnpm exec nx release --skip-publish -d` then `pnpm exec nx release --skip-publish` when you want the next version. Nx will see `release-vX.Y.Z` and compute the next version from it.
 
 ---
 
 ## Quick reference
 
-| Situation                         | Create tag yourself? | What to run                                                   |
-| --------------------------------- | -------------------- | ------------------------------------------------------------- |
-| Next release (tags already exist) | No                   | `nx release -d` then `nx release`, then push                  |
-| First release / sync old release  | Yes                  | Create `release-vX.Y.Z` at commit, push, then use normal flow |
+| Situation                         | Create tag yourself? | What to run                                                                |
+| --------------------------------- | -------------------- | -------------------------------------------------------------------------- |
+| Next release (tags already exist) | No                   | `nx release --skip-publish -d` then `nx release --skip-publish`, then push |
+| First release / sync old release  | Yes                  | Create `release-vX.Y.Z` at commit, push, then use normal flow              |
 
 Tag format: **`release-v{version}`** (e.g. `release-v0.3.0`). The `release` prefix comes from the release group name in `nx.json` (`release.groups.release`).
