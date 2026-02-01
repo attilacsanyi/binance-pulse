@@ -22,6 +22,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "21.1.1",
+    "@angular/aria": "21.1.2",
     "@angular/cdk": "21.1.1",
     "@angular/common": "21.1.1",
     "@angular/compiler": "21.1.1",
@@ -31,8 +32,11 @@
     "@angular/platform-browser": "21.1.1",
     "@angular/platform-browser-dynamic": "21.1.1",
     "@angular/router": "21.1.1",
+    "@ng-icons/core": "33.0.0",
+    "@ng-icons/font-awesome": "33.0.0",
     "@ngrx/signals": "21.0.1",
-    "rxjs": "7.8.0"
+    "rxjs": "7.8.0",
+    "tailwind-variants": "3.2.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "21.1.1",

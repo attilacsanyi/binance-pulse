@@ -11,6 +11,9 @@ importers:
       '@angular/animations':
         specifier: 21.1.1
         version: 21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))
+      '@angular/aria':
+        specifier: 21.1.2
+        version: 21.1.2(@angular/cdk@21.1.1(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@21.1.1(@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))
       '@angular/cdk':
         specifier: 21.1.1
         version: 21.1.1(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@21.1.1(@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0)
@@ -38,12 +41,21 @@ importers:
       '@angular/router':
         specifier: 21.1.1
         version: 21.1.1(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@21.1.1(@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0)
+      '@ng-icons/core':
+        specifier: 33.0.0
+        version: 33.0.0(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
+      '@ng-icons/font-awesome':
+        specifier: 33.0.0
+        version: 33.0.0
       '@ngrx/signals':
         specifier: 21.0.1
         version: 21.0.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
       rxjs:
         specifier: 7.8.0
         version: 7.8.0
+      tailwind-variants:
+        specifier: 3.2.2
+        version: 3.2.2(tailwindcss@4.1.18)
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: 21.1.1
@@ -374,6 +386,12 @@ packages:
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
     peerDependencies:
       '@angular/core': 21.1.1
+
+  '@angular/aria@21.1.2':
+    resolution: {integrity: sha512-veNSzdGN3KSptFnYW+5hCdrdblsSvGAjr3QaBUl5dAL5we5xS2d2q0jIRk+10p/udW/Iv4xMelyVTqhQ2l7mjA==}
+    peerDependencies:
+      '@angular/cdk': 21.1.2
+      '@angular/core': ^21.0.0 || ^22.0.0
 
   '@angular/build@21.1.1':
     resolution: {integrity: sha512-OqlfH7tkahw/lFT6ACU6mqt3AGgTxxT27JTqpzZOeGo1ferR9dq1O6/CT4GiNyr/Z1AMfs7rBWlQH68y1QZb2g==}
@@ -2928,6 +2946,16 @@ packages:
     resolution: {integrity: sha512-Z9nhchO9ZdqFpAVT6+cQMNAyt+MdhAalK4mCmCAe88YflHzZ0x8npevnZxtN4tytbW9nF4mywRMlP04BWOl5Ig==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
+
+  '@ng-icons/core@33.0.0':
+    resolution: {integrity: sha512-yLRBA6FnvW16dCCqiSoA7YrCwsPcrrwmh/VylmMLHZuBe7lmPnBJ5JE8hILU9HmYr+HPPXoH47esu881M7lftA==}
+    peerDependencies:
+      '@angular/common': '>=21.0.0'
+      '@angular/core': '>=21.0.0'
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/font-awesome@33.0.0':
+    resolution: {integrity: sha512-kFFZup1R3pwb9cy4vFla1lyaCvF6hCXOnvz9dAGPhCvSkdeixc6CtTWe83PFBa+2yXP9NDXDRsQPac2FQ1T1ng==}
 
   '@ngrx/signals@21.0.1':
     resolution: {integrity: sha512-krmZDhgHrnmZrxfEJ41bp/aM8Mc55k5B2N7oCLT5w4M3YbOkbnWPkP6bBWMv4XPI+2rqVgkLRW6DaWLwoESaBw==}
@@ -9852,6 +9880,16 @@ packages:
   tabtab@3.0.2:
     resolution: {integrity: sha512-jANKmUe0sIQc/zTALTBy186PoM/k6aPrh3A7p6AaAfF6WPSbTx1JYeGIGH162btpH+mmVEXln+UxwViZHO2Jhg==}
 
+  tailwind-variants@3.2.2:
+    resolution: {integrity: sha512-Mi4kHeMTLvKlM98XPnK+7HoBPmf4gygdFmqQPaDivc3DpYS6aIY6KiG/PgThrGvii5YZJqRsPz0aPyhoFzmZgg==}
+    engines: {node: '>=16.x', pnpm: '>=7.x'}
+    peerDependencies:
+      tailwind-merge: '>=3.0.0'
+      tailwindcss: '*'
+    peerDependenciesMeta:
+      tailwind-merge:
+        optional: true
+
   tailwindcss@4.1.18:
     resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
 
@@ -11073,6 +11111,12 @@ snapshots:
 
   '@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))':
     dependencies:
+      '@angular/core': 21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)
+      tslib: 2.3.0
+
+  '@angular/aria@21.1.2(@angular/cdk@21.1.1(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@21.1.1(@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))':
+    dependencies:
+      '@angular/cdk': 21.1.1(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(@angular/platform-browser@21.1.1(@angular/animations@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)))(rxjs@7.8.0)
       '@angular/core': 21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)
       tslib: 2.3.0
 
@@ -14060,6 +14104,17 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@ng-icons/core@33.0.0(@angular/common@21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0))(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)':
+    dependencies:
+      '@angular/common': 21.1.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)
+      '@angular/core': 21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0)
+      rxjs: 7.8.0
+      tslib: 2.3.0
+
+  '@ng-icons/font-awesome@33.0.0':
+    dependencies:
+      tslib: 2.3.0
 
   '@ngrx/signals@21.0.1(@angular/core@21.1.1(@angular/compiler@21.1.1)(rxjs@7.8.0)(zone.js@0.15.0))(rxjs@7.8.0)':
     dependencies:
@@ -22017,6 +22072,10 @@ snapshots:
       untildify: 3.0.3
     transitivePeerDependencies:
       - supports-color
+
+  tailwind-variants@3.2.2(tailwindcss@4.1.18):
+    dependencies:
+      tailwindcss: 4.1.18
 
   tailwindcss@4.1.18: {}
 
