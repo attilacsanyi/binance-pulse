@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
+import { DividerComponent } from '@bp/ui';
 import { NavbarComponent } from './navbar.component';
 
 @Component({
@@ -22,7 +22,7 @@ import { NavbarComponent } from './navbar.component';
           <h1 class="text-2xl font-bold">{{ title }}</h1>
         </div>
         <div class="my-4">
-          <mat-divider />
+          <bp-divider />
         </div>
         <bp-navbar />
       </div>
@@ -31,7 +31,7 @@ import { NavbarComponent } from './navbar.component';
   host: {
     style: 'display: contents',
   },
-  imports: [RouterModule, NgOptimizedImage, MatDividerModule, NavbarComponent],
+  imports: [RouterModule, NgOptimizedImage, DividerComponent, NavbarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
