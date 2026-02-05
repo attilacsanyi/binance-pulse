@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faHouse, faListUl, faSpinner } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidHouse,
+  faSolidListUl,
+  faSolidSpinner,
+} from '@ng-icons/font-awesome/solid';
 import { iconVariants, type IconVariants } from './icon.variants';
 
 /**
@@ -23,7 +27,9 @@ import { iconVariants, type IconVariants } from './icon.variants';
   selector: 'bp-icon',
   standalone: true,
   imports: [NgIcon],
-  viewProviders: [provideIcons({ faHouse, faListUl, faSpinner })],
+  viewProviders: [
+    provideIcons({ faSolidHouse, faSolidListUl, faSolidSpinner }),
+  ],
   template: `<ng-icon
     [class]="classes()"
     [name]="name()"
