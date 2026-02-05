@@ -28,7 +28,11 @@ import { iconVariants, type IconVariants } from './icon.variants';
   standalone: true,
   imports: [NgIcon],
   viewProviders: [
-    provideIcons({ faSolidHouse, faSolidListUl, faSolidSpinner }),
+    provideIcons({
+      faHouse: faSolidHouse,
+      faListUl: faSolidListUl,
+      faSpinner: faSolidSpinner,
+    }),
   ],
   template: `<ng-icon
     [class]="classes()"
