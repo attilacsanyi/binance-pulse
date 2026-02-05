@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { DividerComponent, IconComponent } from '@bp/ui';
 
 @Component({
   selector: 'bp-navbar',
@@ -14,11 +13,10 @@ import { RouterModule } from '@angular/router';
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="active hover:animate-none"
           class="flex items-center gap-2 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:animate-pulse"
-          ><mat-icon>{{ navItem.icon }}</mat-icon
-          >{{ navItem.label }}</a
+          ><bp-icon [name]="navItem.icon" />{{ navItem.label }}</a
         >
         @if (!last) {
-          <mat-divider [vertical]="true"></mat-divider>
+          <bp-divider orientation="vertical" />
         }
       }
     </nav>
@@ -28,22 +26,22 @@ import { RouterModule } from '@angular/router';
   },
   styles: `
     .active {
-      color: var(--mat-sys-on-primary-container);
+      color: var(--color-primary-value);
     }
   `,
-  imports: [RouterModule, MatIconModule, MatDividerModule],
+  imports: [RouterModule, IconComponent, DividerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   readonly navItems = [
     {
       label: 'Home',
-      icon: 'home',
+      icon: 'faHouse',
       routerLink: '/',
     },
     {
       label: 'Order Book',
-      icon: 'list_alt',
+      icon: 'faListUl',
       routerLink: '/order-book',
     },
   ];
