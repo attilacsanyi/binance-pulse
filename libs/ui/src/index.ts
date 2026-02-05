@@ -29,3 +29,7 @@ export { iconVariants, type IconVariants } from './lib/icon/icon.variants';
 // Autocomplete
 export { AutocompleteComponent } from './lib/autocomplete/autocomplete.component';
 export { autocompleteVariants } from './lib/autocomplete/autocomplete.variants';
+
+// Table
+export { TableComponent } from './lib/table/table.component';
+export { tableVariants } from './lib/table/table.variants';
