@@ -1,5 +1,4 @@
 import { Grid, GridCell, GridRow } from '@angular/aria/grid';
-import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { tableVariants } from './table.variants';
 
@@ -11,7 +10,7 @@ import { tableVariants } from './table.variants';
 @Component({
   selector: 'bp-table',
   standalone: true,
-  imports: [Grid, GridCell, GridRow, DecimalPipe],
+  imports: [Grid, GridCell, GridRow],
   template: `
     @if (title()) {
       <h3 [class]="styles().title()">{{ title() }}</h3>
