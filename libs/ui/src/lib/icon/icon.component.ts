@@ -38,6 +38,9 @@ import { iconVariants, type IconVariants } from './icon.variants';
     [class]="classes()"
     [name]="name()"
   />`,
+  host: {
+    class: 'inline-flex items-center',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
