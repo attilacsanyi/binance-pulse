@@ -6,13 +6,24 @@ import { OrderBookStore } from './order-book.store';
 @Component({
   template: `
     <h2 class="mb-4 text-xl font-bold">Order Book</h2>
+    @let numberOfOrderBooks = orderBookSymbols().length;
     <div class="mb-4">
       <bp-trading-pair-selector
+        [placeholder]="
+          numberOfOrderBooks === 0
+            ? 'Select a trading pair'
+            : 'Select more trading pairs'
+        "
         [tradingPairs]="tradingPairs()"
         [tradingPairsLoading]="tradingPairsLoading()"
         (pairSelected)="addOrderBookSymbol($event)"
       />
     </div>
+    @if (numberOfOrderBooks > 0) {
+      <h3 class="mb-4 text-lg font-bold">
+        Order Books ({{ numberOfOrderBooks }})
+      </h3>
+    }
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       @for (symbol of orderBookSymbols(); track symbol) {
         <bp-order-book-card

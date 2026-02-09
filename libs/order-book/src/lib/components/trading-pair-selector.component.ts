@@ -39,9 +39,9 @@ const initialFormModel: FormModel = {
       [formField]="tradingPair"
       [loading]="tradingPairsLoading()"
       [options]="tradingPairsOptions()"
+      [placeholder]="placeholder()"
       [variant]="tradingPairInvalid ? 'error' : 'primary'"
       label="Trading Pair"
-      placeholder="Select a trading pair"
     />
     @if (tradingPairInvalid) {
       <ul>
@@ -61,7 +61,8 @@ const initialFormModel: FormModel = {
 export class TradingPairSelectorComponent {
   readonly tradingPairs = input.required<{ symbol: string }[] | null>();
   readonly tradingPairsLoading = input(false, { transform: booleanAttribute });
-
+  readonly placeholder = input('Select a trading pair');
+  readonly numberOfOrderBooks = input(0);
   readonly #formModel = signal<FormModel>(initialFormModel);
   readonly form = form(this.#formModel, schemaPath => {
     disabled(schemaPath.tradingPair, () => this.tradingPairsLoading());
