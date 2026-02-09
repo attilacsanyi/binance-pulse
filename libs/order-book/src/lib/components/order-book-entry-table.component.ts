@@ -5,74 +5,28 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { TableComponent } from '@bp/ui';
 
 import { OrderBookEntry as OrderBookEntryVM } from '../models';
 
 /**
- * @docs: https://material.angular.io/components/table/examples#table-column-styling
+ * Order book entry table using bp-table (Angular Aria Grid).
+ *
+ * @see libs/ui/src/lib/table/table.component.ts
  */
 @Component({
   selector: 'bp-order-book-entry-table',
   template: `
-    <h3 class="mb-4 pl-4 text-lg font-bold">{{ title() }}</h3>
-    <table
-      [dataSource]="entries()"
-      mat-table
-      class="entry-table"
-    >
-      @for (column of columns; track column) {
-        <ng-container [matColumnDef]="column.columnDef">
-          <th
-            *matHeaderCellDef
-            mat-header-cell
-          >
-            {{ column.header }}
-          </th>
-          <td
-            *matCellDef="let row"
-            mat-cell
-          >
-            {{ column.cell(row) }}
-          </td>
-        </ng-container>
-      }
-
-      <tr
-        *matHeaderRowDef="displayedColumns"
-        mat-header-row
-      ></tr>
-      <tr
-        *matRowDef="let row; columns: displayedColumns"
-        mat-row
-      ></tr>
-    </table>
+    <bp-table
+      [columns]="columns"
+      [data]="entries()"
+      [title]="title()"
+    />
   `,
   host: {
     style: 'display: contents',
   },
-  styles: `
-    @use '@angular/material' as mat;
-
-    .entry-table {
-      // https://material.angular.io/components/table/styling
-      @include mat.table-overrides(
-        (
-          header-container-height: 2rem,
-          row-item-container-height: 2rem,
-          header-headline-size: var(--mat-sys-title-medium-size),
-          row-item-label-text-size: var(--mat-sys-body-small-size),
-        )
-      );
-
-      // https://material.angular.io/components/table/overview#row-templates
-      .mat-mdc-row .mat-mdc-cell {
-        border-bottom: none;
-        border-top: none;
-      }
-    }
-  `,
-  imports: [MatTableModule],
+  imports: [TableComponent],
   providers: [DecimalPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -84,16 +38,15 @@ export class OrderBookEntryTableComponent {
 
   columns = [
     {
-      columnDef: 'price',
+      key: 'price',
       header: 'Price',
       cell: (element: OrderBookEntryVM) => `${element.price}`,
     },
     {
-      columnDef: 'quantity',
+      key: 'quantity',
       header: 'Qty',
       cell: (element: OrderBookEntryVM) =>
         `${this.#decimalPipe.transform(element.quantity, '1.1-3')}`,
     },
   ];
-  displayedColumns = this.columns.map(c => c.columnDef);
 }
