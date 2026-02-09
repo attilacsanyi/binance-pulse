@@ -8,8 +8,8 @@ import { OrderBookStore } from './order-book.store';
     <h2 class="mb-4 text-xl font-bold">Order Book</h2>
     <div class="mb-4">
       <bp-trading-pair-selector
-        [loading]="tradingPairsLoading()"
         [tradingPairs]="tradingPairs()"
+        [tradingPairsLoading]="tradingPairsLoading()"
         (pairSelected)="addOrderBookSymbol($event)"
       />
     </div>
