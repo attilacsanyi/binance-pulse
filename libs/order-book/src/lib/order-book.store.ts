@@ -20,11 +20,15 @@ interface OrderBookStore {
   tradingPairs: TradingPair[] | null;
 }
 
+const defaultTradingPairs = ['BTCUSDC', 'ETHUSDC'];
+
+const initialState: OrderBookStore = {
+  orderBookSymbols: defaultTradingPairs,
+  tradingPairs: defaultTradingPairs.map(symbol => ({ symbol })),
+};
+
 export const OrderBookStore = signalStore(
-  withState<OrderBookStore>({
-    orderBookSymbols: [],
-    tradingPairs: null,
-  }),
+  withState<OrderBookStore>(initialState),
   // Common dependencies
   withProps(() => ({
     _binanceService: inject(BinanceService),

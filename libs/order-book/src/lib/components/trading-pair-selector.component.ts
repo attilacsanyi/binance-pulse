@@ -16,7 +16,7 @@ type FormModel = {
 };
 
 const initialFormModel: FormModel = {
-  tradingPair: 'BTCUSDC',
+  tradingPair: '',
 };
 
 /**
