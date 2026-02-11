@@ -20,7 +20,7 @@ interface OrderBookStore {
   tradingPairs: TradingPair[] | null;
 }
 
-const defaultTradingPairs = ['BTCUSDC', 'ETHUSDC'];
+export const defaultTradingPairs = ['BTCUSDC', 'ETHUSDC'];
 
 const initialState: OrderBookStore = {
   orderBookSymbols: defaultTradingPairs,

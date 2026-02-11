@@ -3,7 +3,7 @@ import { BinanceService } from '@bp/core';
 import { patchState } from '@ngrx/signals';
 import { unprotected } from '@ngrx/signals/testing';
 import { of } from 'rxjs';
-import { OrderBookStore } from './order-book.store';
+import { defaultTradingPairs, OrderBookStore } from './order-book.store';
 describe('OrderBookStore', () => {
   let store: InstanceType<typeof OrderBookStore>;
   const setup = (data: { tradingPairs: string[] }) => {
@@ -51,8 +51,12 @@ describe('OrderBookStore', () => {
     });
   });
   describe('orderBookSymbols', () => {
-    it('should verify that the order book symbol is empty', () => {
-      expect(store.orderBookSymbols().length).toEqual(0);
+    it('should verify that the order book symbols are the default trading pairs', () => {
+      expect(
+        defaultTradingPairs.every(symbol =>
+          store.orderBookSymbols().includes(symbol),
+        ),
+      ).toEqual(true);
     });
     it('should verify that the order book symbol is added', () => {
       store.addOrderBookSymbol('ADAETH');
