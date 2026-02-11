@@ -55,7 +55,10 @@ Thumbs.db
 # Nx
 .github/instructions/nx.instructions.md
 
-# Claude
+# AI
+
+.agents/
+
 # Claude
 .claude
 CLAUDE.md
