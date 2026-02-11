@@ -3,7 +3,6 @@ import {
   ApplicationConfig,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   PreloadAllModules,
   provideRouter,
@@ -28,10 +27,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: ENV,
       useValue: environment,
-    },
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline', floatLabel: 'auto' },
     },
   ],
 };
