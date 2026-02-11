@@ -1,6 +1,6 @@
 {
   "name": "@binance-pulse/source",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "scripts": {
     "migrate": "nx migrate latest",
